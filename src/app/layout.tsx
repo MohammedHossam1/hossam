@@ -3,9 +3,7 @@ import "./globals.css";
 import Footer from "@/components/layout/footer";
 import SideBar from "@/components/layout/sidebar";
 import Navbar from "@/components/navbar";
-import SplashProvider from "@/components/shared/splash-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { LayoutGroup } from "framer-motion";
 import { EllipsisVertical } from "lucide-react";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
@@ -60,9 +58,7 @@ export default async function RootLayout({
 
           <div className="flex-1 overflow-auto hide-scrollbar ">
             <main>
-              <LayoutGroup>
-                <SplashProvider>{children}</SplashProvider>
-              </LayoutGroup>
+              {children}
             </main>
             <Footer />
           </div>

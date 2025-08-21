@@ -2,7 +2,9 @@ import React from 'react'
 
 const ProjectCard = () => {
   return (
-    <div>ProjectCard</div>
+    <div className='bg-card p-4 '>
+        
+    </div>
   )
 }
 
