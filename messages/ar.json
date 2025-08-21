@@ -1,0 +1,45 @@
+{
+  "navbar": {
+    "home": "الرئيسيه",
+    "about": "من نحن",
+    "contact": "تواصل معنا",
+    "signIn": "تسجيل الدخول",
+    "signUp": "انشاء حساب",
+    "profile": "الملف الشخصي",
+    "settings": "الاعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "auth": {
+    "signIn": "تسجيل الدخول",
+    "signUp": "انشاء حساب",
+    "name": "الاسم",
+    "phone": "رقم الهاتف",
+    "email": "الايميل",
+    "password": "كلمة المرور",
+    "rePassword": "تاكيد كلة المرور",
+    "verifyCode": "كود التاكيد",
+    "resetPassword": "تغيير كلمة المررور",
+    "forgotPassword": "نسيت كلمة المرور",
+    "noAccount":"ليس لديك حساب ؟",
+    "haveAccount":"لديك حساب بالفعل ؟",
+    "reset":"تغيير كلمة المرور",
+    "send":"ارسال",
+    "rememberMe":"تذكرني"
+  },
+  "errors":{
+    "required":"مطلوب"  ,
+    "minName":"اقل عدد حروف 3",
+    "maxName":" يجيب الا يزيد عدد الحروف عن 40",
+    "minPassword":"كلمة المرور يجب ان تكون على الاقل 8 حروف",
+    "passwordMismatch":"كلمة المرور غير متطابقة",
+    "invalidEmail":"الايميل غير صحيح",
+    "invalidPhone":"رقم الهاتف غير صحيح"
+
+  },
+  "notFound": {
+    "notFound": "غير موجوده",
+    "notFoundDesc": "الصفحه المطلوبه غير متوفره",
+    "goBack": "الرئيسيه",
+    "goHome": "الرئيسيه"
+  }
+}
