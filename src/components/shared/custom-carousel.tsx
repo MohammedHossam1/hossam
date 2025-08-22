@@ -7,18 +7,21 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
+import ProjectCard from "../projects/project-card";
 
 
 interface IProp {
   dots?: boolean;
   arrows?: boolean;
   arrowsBottom?: boolean;
+  data: any[];
 }
 
 export function CustomCarousel({
   dots = true,
   arrows = false,
   arrowsBottom = false,
+  data = [],
 }: IProp) {
   const [api, setApi] = useState<any>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -47,43 +50,40 @@ export function CustomCarousel({
         dir="ltr"
         setApi={setApi}
       >
-        <CarouselContent>
-          <CarouselItem className="w-full">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <div className="space-y-6 flex flex-col "></div>
-            </div>
-          </CarouselItem>
+        <CarouselContent >
+            {data.map((item, index) => (
+              <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
+                  <ProjectCard project={item} />
+              </CarouselItem>
+            ))}
+
         </CarouselContent>
 
         {arrows && (
           <div
-            className={`flex items-center max-lg:hidden gap-2 ${
-              arrowsBottom && "absolute -bottom-10  translate-x-17 "
-            }`}
+            className={`flex items-center max-lg:hidden gap-2 ${arrowsBottom && "absolute -bottom-10  translate-x-17 "
+              }`}
           >
             <CarouselPrevious
-              className={`bg-gradient-blue border-gradient-blue text-white max-xl:opacity-50 focus:opacity-100 hover:opacity-100 -translate-x-3    ${
-                arrowsBottom ? "" : "max-2xl:dtranslate-x-20"
-              } size-12  disabled:bg-transparent  disabled:border-dark-blue  `}
+              className={`bg-gradient-blue border-gradient-blue text-white max-xl:opacity-50 focus:opacity-100 hover:opacity-100 -translate-x-3    ${arrowsBottom ? "" : "max-2xl:dtranslate-x-20"
+                } size-12  disabled:bg-transparent  disabled:border-dark-blue  `}
             />
             <CarouselNext
-              className={`bg-gradient-blue border-gradient-blue text-white max-xl:opacity-50 focus:opacity-100 hover:opacity-100  translate-x-3 ${
-                arrowsBottom ? "" : "max-2xl:-translate-sx-20"
-              } size-12 text-2xl disabled:bg-transparent  disabled:border-dark-blue `}
+              className={`bg-gradient-blue border-gradient-blue text-white max-xl:opacity-50 focus:opacity-100 hover:opacity-100  translate-x-3 ${arrowsBottom ? "" : "max-2xl:-translate-sx-20"
+                } size-12 text-2xl disabled:bg-transparent  disabled:border-dark-blue `}
             />
           </div>
         )}
       </Carousel>
 
       {dots && (
-        <div className="flex justify-center mt-4 gap-2" dir="ltr">
+        <div className="flex justify-start mt-4 gap-2" dir="ltr">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
-              className={`w-3 h-3 rounded-full border border-main ${
-                index === selectedIndex ? "bg-gradient-blue w-4" : "bg-gray-400"
-              }`}
+              className={`w-2  h-1 rounded-full  bg-card ${index === selectedIndex ? "bg-gradient-blue w-5 bg-main" : "bg-card"
+                }`}
             />
           ))}
         </div>

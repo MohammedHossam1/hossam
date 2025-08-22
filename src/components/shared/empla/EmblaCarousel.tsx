@@ -3,7 +3,6 @@ import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import React, { ReactNode } from 'react'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
-import { useLocale } from 'next-intl'
 // import '../empla/embla.css';
 type PropType = {
   fade?: boolean
@@ -21,12 +20,11 @@ type PropType = {
 
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const l = useLocale();
   const { options, numbers, buttonPositions = 'center', children } = props
   const OPTIONS: EmblaOptionsType = {
     loop: true,
     duration: 30,
-    direction: l === 'ar' ? 'rtl' : 'ltr',
+    direction:  'ltr',
     ...options
   };
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [])

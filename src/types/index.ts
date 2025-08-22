@@ -24,3 +24,15 @@ export type SignUpInput = {
   lable: string;
   type: string;
 };
+export type IProject = {
+  id: string;
+  slug: string;
+  name: string;
+  url: string;
+  images: string[];
+  description: string;
+  skills: string[];
+  code: string;
+  demo: string;
+
+};

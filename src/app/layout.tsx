@@ -6,7 +6,6 @@ import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { EllipsisVertical } from "lucide-react";
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
 import { Poppins } from "next/font/google";
 import { HiMenu } from "react-icons/hi";
 const poppins = Poppins({
@@ -23,16 +22,14 @@ export const metadata: Metadata = {
   },
 };
 
-
-export default async function RootLayout({
+export default  function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html >
       <body
         className={`${poppins.className} antialiased min-h-screen flex max-lg:flex-col gap-2 items-center justify-center custom-container `}
       >

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import SectionHeader from "../shared/section-header";
 // -----------------------------
 // Types
 // -----------------------------
@@ -47,9 +48,7 @@ const TimelineColumn = ({ title, items }: { title: string; items: Item[] }) => {
 
     return (
         <div className="">
-            <h2 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                {title}
-            </h2>
+         <SectionHeader title={title} />
             <div className="relative pe-6">
                 <div className="absolute end-3 top-2 bottom-2 w-1 bg-dark-1" />
 
@@ -127,7 +126,7 @@ export default function ExperienceTimeline({
     work?: Item[];
 }) {
     return (
-        <main className="mx-auto max-w-6xl  lg:py-12">
+        <main className="mx-auto max-w-6xl ">
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4  xl:gap-10">
                 <TimelineColumn title="Education" items={education} />
                 <TimelineColumn title="Work History" items={work} />
