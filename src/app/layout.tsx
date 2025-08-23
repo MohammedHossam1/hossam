@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html >
+    <html lang="en">
       <body
         className={`${poppins.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >

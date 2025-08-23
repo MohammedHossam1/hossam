@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { SKILLS } from '@/constants';
-import { FaBehance, FaCheck, FaDribbble, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaCheck, FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import ProfileImage from './profile-image';
 const address = [
   {
@@ -72,11 +72,19 @@ const SideBar = () => {
       </div>
       {/* Social Links */}
       <div className="bg-dark-3 w-full flex items-center justify-between gap-4 py-4 text-text px-8 mt-auto">
-        <a href="#" className="hover:text-main"><FaLinkedin size={14} /></a>
-        <a href="#" className="hover:text-main"><FaDribbble size={14} /></a>
-        <a href="#" className="hover:text-main"><FaBehance size={14} /></a>
-        <a href="#" className="hover:text-main"><FaTwitter size={14} /></a>
-        <a href="#" className="hover:text-main"><FaTwitter size={14} /></a>
+        <a href="#" className="hover:text-main" aria-label="LinkedIn">
+          <FaLinkedin size={14} />
+        </a>
+        <a href="#" className="hover:text-main" aria-label="Facebook">
+          <FaFacebook size={14} />
+        </a>
+        <a href="#" className="hover:text-main" aria-label="Github">
+          <FaGithub size={14} />
+        </a>
+        <a href="#" className="hover:text-main" aria-label="Instagram">
+          <FaInstagram size={14} />
+        </a>
+
       </div>
     </aside>
   );

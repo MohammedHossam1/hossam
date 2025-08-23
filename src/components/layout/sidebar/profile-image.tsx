@@ -3,6 +3,7 @@ import ImageFallBack from '@/components/shared/image-fall-back'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { Eye } from 'lucide-react'
+import Link from 'next/link'
 
 const ProfileImage = () => {
   const [previewOpen, setPreviewOpen] = useState(false)
@@ -35,7 +36,7 @@ const ProfileImage = () => {
         </div>
       </div>
 
-      <h2 className="mt-3 text-lg xl:text-xl font-bold">Mo Hossam</h2>
+      <Link href="/" className="mt-3 text-lg xl:text-xl font-bold hover:text-main duration-500 transition-all">Mo Hossam</Link>
       <p className="text-sm text-gray-400">Front-end Developer</p>
 
       {/* Fullscreen Preview Modal */}

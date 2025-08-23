@@ -62,11 +62,11 @@ const Navbar = () => {
                     width: isMoreThanLG ? (isOpen ? 250 : 70) : '100%',
                 }}
                 transition={{ stiffness: 200, damping: 20, duration: .7 }}
-
-                className="h-full bg-dark-2 text-white min-w-[70px]   shadow-lg overflow-hidden relative z-2"
+                className="h-full bg-dark-2 text-white min-w-[70px] shadow-lg overflow-hidden relative z-2"
             >
                 {/* Menu button */}
                 <button
+                    title="Toggle Menu"
                     onClick={() => toggle()}
                     className="relative py-5 w-full cursor-pointer bg-card flex ">
                     <div
