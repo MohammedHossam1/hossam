@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import SectionHeader from "../shared/section-header";
+import SectionHeader from "../../shared/section-header";
 // -----------------------------
 // Types
 // -----------------------------

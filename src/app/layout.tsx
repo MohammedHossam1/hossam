@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import Footer from "@/components/layout/footer";
+import Footer from "@/components/footer";
 import SideBar from "@/components/layout/sidebar";
 import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
@@ -31,7 +31,7 @@ export default  function RootLayout({
   return (
     <html >
       <body
-        className={`${poppins.className} antialiased min-h-screen flex max-lg:flex-col gap-2 items-center justify-center custom-container `}
+        className={`${poppins.className} antialiased min-h-screen flex max-lg:flex-col gap-2 items-center justify-center lg:custom-container `}
       >
         <div className="lg:hidden w-full flex items-center justify-between p-5 mt-3 bg-dark-2/70 ">
           <EllipsisVertical className="size-6" />
@@ -39,7 +39,7 @@ export default  function RootLayout({
         </div>
         <div className="relative flex  gap-3 xl:gap-7 h-[95vh] w-full rounded-2xl shadow-lg bg-dark-2/70">
           <div
-            className="absolute top-0 left-0 right-0 h-40 bg-cover bg-center"
+            className="absolute top-0 left-0 right-0 h-100 bg-cover bg-center"
             style={{
               backgroundImage: "url('/as.jpg')",
               maskImage: "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))",
@@ -54,7 +54,7 @@ export default  function RootLayout({
           </div>
 
           <div className="flex-1 overflow-auto hide-scrollbar ">
-            <main>
+            <main className="max-lg:p-2">
               {children}
             </main>
             <Footer />

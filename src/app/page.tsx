@@ -1,7 +1,7 @@
 // app/page.tsx
-import ExperienceTimeline from "@/components/experience";
+import ExperienceTimeline from "@/components/layout/experience";
 import Hero from "@/components/layout/hero";
-import FeaturedProjects from "@/components/projects/featured-projects";
+import FeaturedProjects from "@/components/layout/projects/featured-projects";
 
 export default function Page() {
   return (
@@ -11,6 +11,7 @@ export default function Page() {
         <Hero />
         <FeaturedProjects />
         <ExperienceTimeline />
+        
       </div>
     </main>
   );

@@ -1,18 +1,15 @@
-'use client'
-import { getData } from "@/lib/fetch-methods"
-import { useEffect, useState } from "react"
+import ContactForm from "@/components/layout/contact"
+import SectionHeader from "@/components/shared/section-header"
+
 const ContactPage = () => {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    x()
-  }, [])
-  const x = async () => {
-    const res = await getData({ url: "https://jsonplaceholder.typicode.com/posts" , cashed: true})
-    setData(res.data)
-  }
+
+
 
   return (
-    <div>{data && data.length > 0 && data.map((item: any) => <div key={item.id}>{item.title}</div>)}</div>
+    <section className="z-24 py-5 lg:py-10  min-h-[100dvh]  relative">
+      <SectionHeader title="Get in Touch" />
+      <ContactForm />
+    </section>
   )
 }
 

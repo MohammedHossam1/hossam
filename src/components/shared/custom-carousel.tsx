@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
-import ProjectCard from "../projects/project-card";
+import ProjectCard from "../layout/projects/project-card";
 
 
 interface IProp {
@@ -82,7 +82,7 @@ export function CustomCarousel({
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
-              className={`w-2  h-1 rounded-full  bg-card ${index === selectedIndex ? "bg-gradient-blue w-5 bg-main" : "bg-card"
+              className={`w-2  h-1 rounded-full  bg-card transition-all duration-500 cursor-pointer ${index === selectedIndex ? "bg-gradient-blue w-5 bg-main" : "bg-card"
                 }`}
             />
           ))}

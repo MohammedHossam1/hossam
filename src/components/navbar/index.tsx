@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { HiMenu, HiX } from "react-icons/hi";
+import Link from "next/link";
 
 const NAV_ITEMS = [
     { label: "Home", href: "/" },
@@ -40,8 +41,8 @@ const Navbar = () => {
                 {open && (
                     <motion.div
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 1  }}
-                        exit={{ opacity: 0}}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="fixed inset-0 bg-dark-1/50 z-20"
                         onClick={() => setOpen(false)}
                     />
@@ -51,7 +52,7 @@ const Navbar = () => {
                 animate={{ width: open ? 250 : 70 }}
                 transition={{ stiffness: 200, damping: 20, duration: .7 }}
 
-                className="h-full bg-dark-2 text-white  shadow-lg overflow-hidden relative z-30"
+                className="h-full bg-dark-2 text-white min-w-[70px]  shadow-lg overflow-hidden relative z-30"
             >
                 {/* Menu button */}
                 <button
@@ -69,12 +70,12 @@ const Navbar = () => {
                 <AnimatePresence>
                     {!open && activeIndex !== -1 && (
                         <motion.span
-                            key={pathname} // ensure unique key per active page
+                            key={pathname}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="flex items-center  absolute top-20 justify-center mt-10 translate-x-1/3 w-fit rotate-90 uppercase text-xs tracking-widest font-bold text-text/80"
+                            className="flex items-center justify-center  w-full   absolute top-20 mt-10   rotate-90 uppercase text-xs tracking-widest font-bold text-text/80"
                         >
                             {pathname === "/" ? "Home" : pathname.replace("/", "")}
                         </motion.span>
@@ -88,16 +89,22 @@ const Navbar = () => {
                             animate="open"
                             exit="closed"
                             variants={listVariants}
-                            className="flex flex-col gap-3 w-full  px-2 justify-center items-center  h-[80%]"
+                            className="flex flex-col gap-3 w-full !shrink-0  px-2 justify-center items-center  h-[80%]"
                         >
                             {NAV_ITEMS.map((item) => (
                                 <motion.li
                                     key={item.href}
-                                    onClick={() => setOpen(false)}
                                     variants={itemVariants}
-                                    className={` rounded-md px-3 py-1  uppercase font-medium cursor-pointer  text-text  duration-300 transition-all hover:text-white text-xs`}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
-                                    {item.label}
+                                    <Link
+                                        href={item.href}
+                                        onClick={() => setOpen(false)}
+                                        className={`rounded-md px-3 py-1 uppercase font-medium cursor-pointer text-text duration-300 transition-all hover:text-white text-xs`}
+                                    >
+                                        {item.label}
+                                    </Link>
                                 </motion.li>
                             ))}
                         </motion.ul>

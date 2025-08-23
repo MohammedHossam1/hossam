@@ -1,8 +1,8 @@
 "use client";
 
 import { projects } from "@/constants";
-import { CustomCarousel } from "../shared/custom-carousel";
-import SectionHeader from "../shared/section-header";
+import { CustomCarousel } from "../../shared/custom-carousel";
+import SectionHeader from "../../shared/section-header";
 
 const FeaturedProjects = () => {
     return (

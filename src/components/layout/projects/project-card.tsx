@@ -1,5 +1,5 @@
 import React from "react";
-import ImageFallBack from "../shared/image-fall-back";
+import ImageFallBack from "../../shared/image-fall-back";
 import { IProject } from "@/types";
 import Link from "next/link";
 
