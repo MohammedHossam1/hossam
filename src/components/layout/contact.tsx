@@ -36,7 +36,7 @@ const ContactForm = () => {
     };
 
     return (
-        <div className="bg-card relative z-21 text-text p-2 lg:p-6">
+        <div className="bg-card relative z-2 text-text p-2 lg:p-6">
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-4 lg:gap-8 w-full "

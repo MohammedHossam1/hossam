@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { useLocale } from "next-intl";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -23,7 +22,6 @@ const CustomInput = ({
   placeholder,
   ...props
 }: CustomInputProps) => {
-  const locale = useLocale();
   return (
     <>
       <FormItem className="relative w-full">
@@ -36,7 +34,7 @@ const CustomInput = ({
               {label}
             </FormLabel>
             <Input
-              dir={locale == "ar" ? "rtl" : "ltr"}
+              dir={"ltr"}
               id={id}
               disabled={!isEditing}
               type={type}

@@ -136,12 +136,9 @@
   padding-inline: 1rem;
 
   @variant lg {
-    padding-inline: 2rem;
+    padding-inline: 1rem;
   }
 
-  @variant xl {
-    padding-inline: 2rem;
-  }
 
   @variant 2xl {
     padding-inline: 2.5rem;
@@ -167,27 +164,20 @@
 
 .hide-scrollbar {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
-  /* Chrome, Safari */
 }
 
-/* تخصيص Scrollbar كامل */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
-  /* عرض الـ scrollbar */
   height: 8px;
-  /* في حالة X-axis scroll */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #1f1f1f;
-  /* لون الخلفية */
   border-radius: 10px;
 }
 

@@ -1,9 +1,10 @@
 'use client';
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
-import { HiMenu, HiX } from "react-icons/hi";
+import { useNavbarStore } from "@/store";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { HiMenu, HiX } from "react-icons/hi";
 
 const NAV_ITEMS = [
     { label: "Home", href: "/" },
@@ -13,7 +14,9 @@ const NAV_ITEMS = [
 ];
 
 const Navbar = () => {
-    const [open, setOpen] = useState(false);
+    const { isOpen, toggle, close } = useNavbarStore();
+    const [isMoreThanLG, setIsMoreThanLG] = useState(false);
+
     const pathname = usePathname();
 
     const activeIndex = NAV_ITEMS.findIndex((item) => item.href === pathname);
@@ -27,6 +30,12 @@ const Navbar = () => {
             transition: { staggerChildren: 0.05, staggerDirection: -1 },
         },
     };
+    useEffect(() => {
+        const handleResize = () => setIsMoreThanLG(window.innerWidth > 1024)
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     // Variants for each li
     const itemVariants = {
@@ -38,37 +47,39 @@ const Navbar = () => {
         <>
             {/* Overlay */}
             <AnimatePresence>
-                {open && (
+                {isOpen && isMoreThanLG && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-dark-1/50 z-20"
-                        onClick={() => setOpen(false)}
+                        className="fixed inset-0 bg-dark-1/50 z-2"
+                        onClick={() => toggle()}
                     />
                 )}
             </AnimatePresence>
             <motion.div
-                animate={{ width: open ? 250 : 70 }}
+                animate={{
+                    width: isMoreThanLG ? (isOpen ? 250 : 70) : '100%',
+                }}
                 transition={{ stiffness: 200, damping: 20, duration: .7 }}
 
-                className="h-full bg-dark-2 text-white min-w-[70px]  shadow-lg overflow-hidden relative z-30"
+                className="h-full bg-dark-2 text-white min-w-[70px]   shadow-lg overflow-hidden relative z-2"
             >
                 {/* Menu button */}
                 <button
-                    onClick={() => setOpen(!open)}
+                    onClick={() => toggle()}
                     className="relative py-5 w-full cursor-pointer bg-card flex ">
                     <div
 
                         className="flex items-center justify-center w-full h-10 rounded-full text-white "
                     >
-                        {open ? <HiX size={20} /> : <HiMenu size={20} />}
+                        {isOpen ? <HiX size={20} /> : <HiMenu size={20} />}
                     </div>
                 </button>
 
                 {/* Active indicator when collapsed */}
                 <AnimatePresence>
-                    {!open && activeIndex !== -1 && (
+                    {!isOpen && activeIndex !== -1 && (
                         <motion.span
                             key={pathname}
                             initial={{ opacity: 0 }}
@@ -83,7 +94,7 @@ const Navbar = () => {
                 </AnimatePresence>
                 {/* Nav links with staggered animation */}
                 <AnimatePresence>
-                    {open && (
+                    {isOpen && (
                         <motion.ul
                             initial="closed"
                             animate="open"
@@ -100,7 +111,7 @@ const Navbar = () => {
                                 >
                                     <Link
                                         href={item.href}
-                                        onClick={() => setOpen(false)}
+                                        onClick={close}
                                         className={`rounded-md px-3 py-1 uppercase font-medium cursor-pointer text-text duration-300 transition-all hover:text-white text-xs`}
                                     >
                                         {item.label}

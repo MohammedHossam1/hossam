@@ -3,11 +3,10 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import SideBar from "@/components/layout/sidebar";
 import Navbar from "@/components/navbar";
+import MobileNav from "@/components/navbar/mobile-nav";
 import { Toaster } from "@/components/ui/sonner";
-import { EllipsisVertical } from "lucide-react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { HiMenu } from "react-icons/hi";
 const poppins = Poppins({
   variable: "--font-almarai",
   subsets: ["latin"],
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default  function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -31,15 +30,13 @@ export default  function RootLayout({
   return (
     <html >
       <body
-        className={`${poppins.className} antialiased min-h-screen flex max-lg:flex-col gap-2 items-center justify-center lg:custom-container `}
+        className={`${poppins.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >
-        <div className="lg:hidden w-full flex items-center justify-between p-5 mt-3 bg-dark-2/70 ">
-          <EllipsisVertical className="size-6" />
-          <HiMenu className="size-6" />
-        </div>
-        <div className="relative flex  gap-3 xl:gap-7 h-[95vh] w-full rounded-2xl shadow-lg bg-dark-2/70">
+        {/* Mobile nav */}
+        <MobileNav />
+        <div className="relative flex  gap-3 xl:gap-7 lg:h-[95vh] w-full rounded-2xl shadow-lg bg-dark-2/70">
           <div
-            className="absolute top-0 left-0 right-0 h-100 bg-cover bg-center"
+            className="absolute top-0 left-0 right-0 h-50 bg-cover bg-center"
             style={{
               backgroundImage: "url('/as.jpg')",
               maskImage: "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))",
@@ -49,7 +46,7 @@ export default  function RootLayout({
             <div className="absolute inset-0 bg-dark-3/95 rounded-none"></div>
 
           </div>
-          <div className="max-lg:hidden lg:w-[20%] relative z-10">
+          <div className="max-lg:hidden lg:w-[20%] relative z-3">
             <SideBar />
           </div>
 
@@ -59,7 +56,7 @@ export default  function RootLayout({
             </main>
             <Footer />
           </div>
-          <div className="max-lg:hidden bg-dark-2 relative z-10">
+          <div className="max-lg:hidden bg-dark-2 relative ">
             <Navbar />
           </div>
 

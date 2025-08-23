@@ -6,7 +6,7 @@ const ContactPage = () => {
 
 
   return (
-    <section className="z-24 py-5 lg:py-10  min-h-[100dvh]  relative">
+    <section className="z-2 py-5 lg:py-10  min-h-[100dvh]  relative">
       <SectionHeader title="Get in Touch" />
       <ContactForm />
     </section>

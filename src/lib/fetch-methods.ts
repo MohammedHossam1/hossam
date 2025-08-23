@@ -1,13 +1,11 @@
 'use server';
 import { getCookie } from "@/services";
-import { getLocale } from "next-intl/server";
 export const getHeaders = async (
   token: boolean,
   contentType: "json" | "form" = "json"
 ): Promise<{ [key: string]: string } | null> => {
-  const locale = await getLocale();
   const headers: Record<string, string> = {
-    "Accept-Language": locale,
+    "Accept-Language": "en",
   };
 
   if (contentType === "json") {

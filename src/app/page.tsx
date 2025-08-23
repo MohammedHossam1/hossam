@@ -7,11 +7,10 @@ export default function Page() {
   return (
     <main className="relative min-h-[calc(100vh-2rem)]">
       {/* Content */}
-      <div className="relative z-10 py-5 lg:py-16 space-y-10 lg:space-y-16">
+      <div className="relative z-2 py-5 lg:py-16 space-y-10 lg:space-y-16">
         <Hero />
         <FeaturedProjects />
         <ExperienceTimeline />
-        
       </div>
     </main>
   );

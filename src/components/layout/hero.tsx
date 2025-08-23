@@ -1,9 +1,40 @@
+'use client'
+import { useEffect, useState } from "react"
 import { Button } from "../ui/button"
 
 const Hero = () => {
+    const fullText = "I create interactive and responsive web interfaces."
+    const [displayText, setDisplayText] = useState("")
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [index, setIndex] = useState(0)
+    const speed = 50 
+
+    useEffect(() => {
+        const handle = setTimeout(() => {
+            if (!isDeleting) {
+                setDisplayText(fullText.slice(0, index + 1))
+                setIndex(index + 1)
+
+                if (index + 1 === fullText.length) {
+                    setTimeout(() => setIsDeleting(true), 1000) 
+                }
+            } else {
+                setDisplayText(fullText.slice(0, index - 1))
+                setIndex(index - 1)
+
+                if (index - 1 === 0) {
+                    setIsDeleting(false)
+                }
+            }
+        }, speed)
+
+        return () => clearTimeout(handle)
+    }, [index, isDeleting])
+
     return (
-        <div className="relative ">
-            <div className="absolute bottom-full inset-x-10 h-7 bg-dark-2"></div>
+        <div className="relative">
+            <div className="absolute bottom-full inset-x-2 lg:inset-x-10 h-3 lg:h-7 bg-dark-2"></div>
+
             <div className="relative bg-[url('/as.jpg')] text-white bg-cover bg-center h-[60vh] lg:h-[45vh] px-5 lg:px-14">
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-dark-3/70 rounded-none"></div>
@@ -11,11 +42,13 @@ const Hero = () => {
                 {/* Content */}
                 <div className="relative xl:w-4/7 h-full flex flex-col justify-center gap-3">
                     <h1 className="text-5xl font-extrabold">
-                        Discover my Amazing Art Space!
+                        Explore My  World!
                     </h1>
-                    <p className="text-sm">
-                        {"<"} <span className="text-main ">{"code"}</span> {">"} I build
-                        automation tools. <span className="text-main">{"<code>"}</span>
+                    <p className="text-sm font-mono  flex items-center gap-1">
+                        {"<"} <span className="text-main ">{"code"}</span> {">"}
+                        {displayText}
+                        <span className=" animate-pulse">|</span>
+                        {"</"} <span className="text-main ">{"code"}</span> {">"}
                     </p>
                     <Button className="w-fit px-10 py-5">Get Started</Button>
                 </div>
