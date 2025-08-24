@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 import ProjectCard from "../layout/projects/project-card";
+import Link from "next/link";
 
 
 interface IProp {
@@ -40,7 +41,7 @@ export function CustomCarousel({
     return () => {
       api.off("select", update);
     };
-  }, [api]);
+  }, [api, data?.length]);
 
   return (
     <div className="relative w-full  block">
@@ -51,12 +52,16 @@ export function CustomCarousel({
         setApi={setApi}
       >
         <CarouselContent >
-            {data.map((item, index) => (
-              <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
-                  <ProjectCard project={item} />
-              </CarouselItem>
-            ))}
-
+          {data.map((item, index) => (
+            <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
+              <ProjectCard project={item} />
+            </CarouselItem>
+          ))}
+          <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
+            <Link href={`/projects`} className="bg-card text-white tracking-widest shadow-lg flex flex-col gap-4 h-full items-center justify-center transition-all duration-300">
+            All Projects
+            </Link>
+          </CarouselItem>
         </CarouselContent>
 
         {arrows && (

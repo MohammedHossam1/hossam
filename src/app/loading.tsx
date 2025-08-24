@@ -9,6 +9,7 @@ const Loading = () => {
           src={'/avatar.jpeg'}
           alt="Loader Image"
           fill
+          priority
           className="object-cover"
         />
       </div>
