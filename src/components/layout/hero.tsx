@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Button } from "../ui/button"
 
 const Hero = () => {
-    const fullText = "I create interactive and responsive web interfaces."
+    const fullText = "create web apps with ease."
     const [displayText, setDisplayText] = useState("")
     const [isDeleting, setIsDeleting] = useState(false)
     const [index, setIndex] = useState(0)
