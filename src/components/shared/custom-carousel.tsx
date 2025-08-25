@@ -9,11 +9,13 @@ import {
 import { useEffect, useState } from "react";
 import ProjectCard from "../layout/projects/project-card";
 import Link from "next/link";
+import ImageFallBack from "./image-fall-back";
 
 
 interface IProp {
   dots?: boolean;
   arrows?: boolean;
+  isProjectDetails?: boolean;
   arrowsBottom?: boolean;
   data: any[];
 }
@@ -22,6 +24,7 @@ export function CustomCarousel({
   dots = true,
   arrows = false,
   arrowsBottom = false,
+  isProjectDetails = false,
   data = [],
 }: IProp) {
   const [api, setApi] = useState<any>(null);
@@ -52,16 +55,26 @@ export function CustomCarousel({
         setApi={setApi}
       >
         <CarouselContent >
-          {data.map((item, index) => (
-            <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
-              <ProjectCard project={item} />
-            </CarouselItem>
-          ))}
-          <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
-            <Link href={`/projects`} className="bg-card text-white tracking-widest shadow-lg flex flex-col gap-4 h-full items-center justify-center transition-all duration-300">
-            All Projects
-            </Link>
-          </CarouselItem>
+          {!isProjectDetails ?
+            <>
+              {data.map((item, index) => (
+                <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
+                  <ProjectCard project={item} />
+                </CarouselItem>
+              ))}
+              <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
+                <Link href={`/projects`} className="bg-card text-white tracking-widest shadow-lg flex flex-col gap-4 h-full items-center justify-center transition-all duration-300">
+                  All Projects
+                </Link>
+              </CarouselItem>
+            </>
+            :
+            data.map((item, index) => (
+              <CarouselItem key={index} className="w-full basis-full relative h-x40 aspect-video ">
+                <ImageFallBack src={item} alt={item} fill className="object-cover object-top"/>
+              </CarouselItem>
+            ))
+          }
         </CarouselContent>
 
         {arrows && (

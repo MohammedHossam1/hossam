@@ -7,30 +7,20 @@ export default function PaginationContainer({
 }: {
   page: number;
   totalPages: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>; 
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
+  // هل وصلنا لآخر صفحة؟
+  const isLastPage = page >= totalPages;
+
   return (
-    <div className="flex gap-2 mt-4 lg:mt-10 items-center " >
+    <div className="flex justify-center mt-6 lg:mt-10">
       <button
-        aria-label="Previous page "
-        disabled={page === 1}
-        onClick={() => setPage((p) => Math.max(p - 1, 1))}
-        className="px-3 py-1  rounded disabled:opacity-50 cursor-pointer"
-      >
-        Prev
-      </button>
-
-      <span>
-        Page {page} of {totalPages}
-      </span>
-
-      <button
-        aria-label="Next page"
-        disabled={page === totalPages}
+        aria-label="Load more"
+        disabled={isLastPage}
         onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-        className="px-3 py-1  rounded disabled:opacity-50 cursor-pointer"
+        className="px-6 py-2 bg-main text-black cursor-pointer disabled:opacity-50  disabled:cursor-auto transition-all duration-200 hover:bg-main/90"
       >
-        Next
+        {isLastPage ? "No more items" : "Load more"}
       </button>
     </div>
   );

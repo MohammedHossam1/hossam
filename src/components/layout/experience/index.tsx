@@ -48,7 +48,7 @@ const TimelineColumn = ({ title, items }: { title: string; items: Item[] }) => {
 
     return (
         <div className="">
-         <SectionHeader title={title} />
+            <SectionHeader title={title} />
             <div className="relative pe-6">
                 <div className="absolute end-3 top-2 bottom-2 w-1 bg-dark-1" />
 
@@ -83,38 +83,56 @@ const TimelineColumn = ({ title, items }: { title: string; items: Item[] }) => {
 // -----------------------------
 const EDUCATION: Item[] = [
     {
-        title: "Al-Azhar University",
-        role: "BA, History (Humanities)",
-        data: "2019 – 2023",
-        description:
-            "Studied modern & medieval Middle Eastern history. Led a student club and organized two exhibitions.",
+        title: "Mansoura University",
+        role: "BCom, Commerce",
+        data: "2016 – 2020",
+        description: "Graduated with a Bachelor of Commerce degree from Mansoura University.",
     },
     {
-        title: "Self‑Learning",
+        title: "Route Academy",
+        role: "Fundamentals of Programming",
+        data: "2022",
+        description: "Completed the Fundamentals of Programming course at Route Academy.",
+    },
+    {
+        title: "Route Academy",
         role: "Frontend Development",
-        data: "2018 – Present",
-        description:
-            "Focused on React, TypeScript, Tailwind, Motion, and UI/UX best practices.",
+        data: "2022",
+        description: "Completed the Frontend Development course at Route Academy (React, TypeScript, UI/UX).",
+    },
+    {
+        title: "Route Academy",
+        role: "Backend Development (.NET)",
+        data: "2023 – 2025",
+        description: "Completed the Backend Development course at Route Academy (C#, .NET, Databases).",
     },
 ];
+
 
 const WORK: Item[] = [
     {
-        title: "Serv5",
-        role: "Frontend Developer (Past)",
-        data: "2023 – 2024",
-        description:
-            "Built responsive dashboards and landing pages, shipped design systems, and collaborated with backend teams.",
+      title: "Serv5",
+      role: "Frontend Developer (Past)",
+      data: "2023 – 2024",
+      description:
+        "Built responsive dashboards and landing pages, shipped design systems, and collaborated with backend teams.",
     },
     {
-        title: "Freelance",
-        role: "Frontend Engineer",
-        data: "2024 – Present",
-        description:
-            "Delivering React apps, micro‑frontends, and UI kits. Focus on performance, accessibility, and clean DX.",
+      title: "EL-Qadi",
+      role: "Frontend Developer (Part-time)",
+      data: "2024 – Present",
+      description:
+        "Working part-time on React projects, contributing to UI components, and optimizing web performance.",
     },
-];
-
+    {
+      title: "Freelance Projects",
+      role: "Frontend Engineer",
+      data: "2024 – Present",
+      description:
+        "Delivered two independent freelance projects, focusing on React apps, micro-frontends, and clean UI/UX design.",
+    },
+  ];
+  
 // -----------------------------
 // Main Component — split page into two columns
 // -----------------------------

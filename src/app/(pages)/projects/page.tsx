@@ -10,34 +10,41 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useProjects } from "@/hooks";
-import { IProject } from "@/types";
+import { useProjects, useSkillsFilter } from "@/hooks";
+import { IProject, ISkill } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
-
-
-const tabs = ["All", "Next.js", "React Native", "React"];
+import { useEffect, useState } from "react";
 
 const Projects = () => {
   // const search = useSearchParams();
+  const [allProjects, setAllProjects] = useState<IProject[]>([]);
 
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState("all");
   const [page, setPage] = useState(1);
-  const limit = 3;
+  const limit = 9;
 
 
   const { data, isLoading, isError }: any = useProjects(page, limit);
-  console.log(data, "projects");
-  // useEffect(() => {
-  //   setPage(search.get("page") ? Number(search.get("page")) : 1);
-  // }, [page])
+  const { data: skillsData, isError: skillsError }: any = useSkillsFilter();
+  useEffect(() => {
+    if (data?.data) {
+      setAllProjects((prev) => {
+        const newProjects = data.data.filter(
+          (p: IProject) => !prev.some((existing) => existing.id === p.id)
+        );
+        return page === 1 ? data.data : [...prev, ...newProjects];
+      });
+    }
+  }, [data, page]);
+ 
+  const filteredProjects =
+    activeTab === "all"
+      ? allProjects
+      : allProjects.filter((p: IProject) => p.skills.includes(activeTab));
+
   if (isLoading) return <Loading />;
-  if (isError) return <p>Something went wrong</p>;
-  // const filteredProjects =
-  //   activeTab === "All"
-  //     ? projects
-  //     : projects.filter((p) => p.skills.includes(activeTab));
+  if (isError || skillsError) return <p>Something went wrong</p>;
   const totalPages = Math.ceil((data?.total ?? 0) / limit);
 
   return (
@@ -48,16 +55,25 @@ const Projects = () => {
 
         {/* Tabs on large screens */}
         <div className="hidden lg:flex gap-3">
-          {tabs.map((tab) => (
+          <button
+            onClick={() => setActiveTab("all")}
+            className={`px-2 py-1 text-sm transition-all cursor-pointer capitalize ${activeTab === "all"
+              ? "text-white"
+              : "text-text hover:text-white"
+              }`}
+          >
+            {"All"}
+          </button>
+          {skillsData?.data?.map((tab: ISkill, idx: number) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-2 py-1 text-sm transition-all cursor-pointer ${activeTab === tab
+              key={idx}
+              onClick={() => setActiveTab(tab.name)}
+              className={`px-2 py-1 text-sm transition-all cursor-pointer capitalize ${activeTab === tab.name
                 ? "text-white"
                 : "text-text hover:text-white"
                 }`}
             >
-              {tab}
+              {tab.name}
             </button>
           ))}
         </div>
@@ -68,20 +84,27 @@ const Projects = () => {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="flex items-center gap-2 text-sm bg-transparent border-0 hover:bg-transparent hover:text-white"
+                className="flex items-center gap-2 text-sm bg-transparent border-0 hover:bg-transparent capitalize hover:text-white"
               >
                 {activeTab} <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {tabs.map((tab) => (
+              <DropdownMenuItem
+                onClick={() => setActiveTab("all")}
+                className={`cursor-pointer capitalize ${activeTab === "all" ? "font-semibold text-primary" : ""
+                  }`}
+              >
+                {"All"}
+              </DropdownMenuItem>
+              {skillsData?.data.map((tab: ISkill) => (
                 <DropdownMenuItem
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`cursor-pointer ${activeTab === tab ? "font-semibold text-primary" : ""
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.name)}
+                  className={`cursor-pointer capitalize ${activeTab === tab.name ? "font-semibold text-primary" : ""
                     }`}
                 >
-                  {tab}
+                  {tab.name}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
@@ -92,7 +115,7 @@ const Projects = () => {
       {/* Projects Grid */}
       <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence>
-          {data?.data.map((project: IProject) => (
+          {filteredProjects?.map((project: IProject) => (
             <motion.div
               key={project.id}
               layout
