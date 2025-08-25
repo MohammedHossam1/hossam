@@ -5,12 +5,15 @@ import Link from "next/link";
 
 const ProjectCard: React.FC<{ project: IProject }> = ({ project }) => {
   return (
-    <Link href={`/projects/${project.slug}`} className="bg-card text-text shadow-lg flex flex-col gap-4 transition-all duration-300">
+    <Link href={`/projects/${project.slug}`} className="bg-card text-text shadow-lg flex flex-col gap-4 h-full transition-all duration-300">
       {project.url && (
         <div className="w-full relative h-40 overflow-hidden ">
           <ImageFallBack
             fill
             src={project.url}
+            sizes="(max-width: 768px) 100vw, 
+            (max-width: 1200px) 50vw, 
+            33vw"
             alt={project.name}
             className="w-full h-full object-cover"
           />

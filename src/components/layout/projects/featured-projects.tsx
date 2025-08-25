@@ -15,7 +15,7 @@ const FeaturedProjects = () => {
     return (
         <section className=" text-text">
             <SectionHeader title="Featured Projects" />
-            <CustomCarousel data={data?.data} />
+            <CustomCarousel data={data?.data} isProjectDetails={false} />
         </section>
     );
 };

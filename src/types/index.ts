@@ -34,5 +34,9 @@ export type IProject = {
   skills: string[];
   code: string;
   demo: string;
-
+};
+export type ISkill = {
+  id: string;
+  name: string;
+  percent: number;
 };
