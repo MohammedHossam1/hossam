@@ -2,7 +2,7 @@
 import { useSkills } from '@/hooks';
 import { ISkill } from '@/types';
 import { UseQueryResult } from '@tanstack/react-query';
-import { FaCheck, FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaCheck, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import ProfileImage from './profile-image';
 const address = [
   {
@@ -10,12 +10,12 @@ const address = [
     title: "Residence : "
   },
   {
-    name: "Egypt",
+    name: "Giza",
     title: "City : "
   },
   {
     name: "Egypt",
-    title: "Age : "
+    title: "27 : "
   }
 ]
 const Seperator = () => <div className="w-full h-[1px] bg-text/30 my-5" />
@@ -78,17 +78,20 @@ const SideBar = () => {
       </div>
       {/* Social Links */}
       <div className="bg-dark-3 w-full flex items-center justify-between gap-4 py-4 text-text px-8 mt-auto">
-        <a href="#" className="hover:text-main" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/mohammedfayyad" className="hover:text-main" aria-label="LinkedIn">
           <FaLinkedin size={14} />
         </a>
-        <a href="#" className="hover:text-main" aria-label="Facebook">
+        <a href="https://www.facebook.com/muhamedhoss" className="hover:text-main" aria-label="Facebook">
           <FaFacebook size={14} />
         </a>
-        <a href="#" className="hover:text-main" aria-label="Github">
+        <a href="https://github.com/MohammedHossam1" className="hover:text-main" aria-label="Github">
           <FaGithub size={14} />
         </a>
-        <a href="#" className="hover:text-main" aria-label="Instagram">
+        <a href="https://www.instagram.com/mohammedhossam.dev/" className="hover:text-main" aria-label="Instagram">
           <FaInstagram size={14} />
+        </a>
+        <a href="https://wa.me:+201125997082" className="hover:text-main" aria-label="whats app">
+          <FaWhatsapp size={14} />
         </a>
 
       </div>
