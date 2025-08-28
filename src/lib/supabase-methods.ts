@@ -15,6 +15,16 @@ export async function getProjects(page: number, limit: number): Promise<{ data: 
 
   return { data: data as IProject[], total: count ?? 0 };
 }
+export async function getAllProjectSlugs() {
+  const { data, error } = await supabase
+    .from("projects")
+    .select("slug")
+    .order("created_at", { ascending: true });
+  if (error) throw error;
+  return data?.map((d) => d.slug?.trim()) || [];
+}
+
+
 export async function getProjectBySlug(slug: string): Promise<IProject | null> {
   const { data, error } = await supabase
     .from("projects")
@@ -26,8 +36,18 @@ export async function getProjectBySlug(slug: string): Promise<IProject | null> {
     console.error("Error fetching project:", error.message);
     return null;
   }
-
   return data as IProject;
+}
+export async function getSideSkills(): Promise<IProject | null> {
+  const { data, error } = await supabase
+    .from("side_skills")
+    .select("*")
+
+  if (error) {
+    console.error("Error fetching project:", error.message);
+    return null;
+  }
+  return data as any;
 }
 export async function getSkills() {
   const { data, error, count } = await supabase
