@@ -1,14 +1,16 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image, { ImageProps } from "next/image";
 import { useState } from "react";
 
 type Prop = {
-  src?: string | null;
-  alt?: string | null;
-  className?: string;
-  isUser?: boolean;
-} & Omit<ImageProps, "src" | "alt" | "className">; // Extend with ImageProps, excluding the ones we already have
+  src?: string | StaticImport | null
+  alt?: string | null
+  className?: string
+  isUser?: boolean
+} & Omit<ImageProps, "src" | "alt">
+
 
 export default function ImageFallBack({
   src,

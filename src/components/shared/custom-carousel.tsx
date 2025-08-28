@@ -54,7 +54,7 @@ export function CustomCarousel({
         dir="ltr"
         setApi={setApi}
       >
-        <CarouselContent >
+        <CarouselContent className="">
           {!isProjectDetails ?
             <>
               {data.map((item, index) => (
@@ -62,7 +62,7 @@ export function CustomCarousel({
                   <ProjectCard project={item} />
                 </CarouselItem>
               ))}
-              <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
+              <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 px-6">
                 <Link href={`/projects`} className="bg-card text-white tracking-widest shadow-lg flex flex-col gap-4 h-full items-center justify-center transition-all duration-300">
                   All Projects
                 </Link>
@@ -70,8 +70,8 @@ export function CustomCarousel({
             </>
             :
             data.map((item, index) => (
-              <CarouselItem key={index} className="w-full basis-full relative h-x40 aspect-video ">
-                <ImageFallBack src={item} alt={item} fill className="object-cover object-top"/>
+              <CarouselItem key={index} className="w-full basis-full lg:basis-1/2    overflow-hidden ">
+                <ImageFallBack src={item} alt={item} width={500} height={500} className="object-cover w-full max-h-[300px]  h-full  object-top"/>
               </CarouselItem>
             ))
           }

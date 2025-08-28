@@ -1,4 +1,4 @@
-import { getProjectBySlug, getProjects, getSkills, getSkillsFilter } from "@/lib/supabase-methods";
+import { getProjectBySlug, getProjects, getSideSkills, getSkills, getSkillsFilter } from "@/lib/supabase-methods";
 import { IProject, ISkill } from "@/types";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
@@ -38,6 +38,15 @@ export function useSkillsFilter() {
   const options: UseQueryOptions<SkillsFilterQueryData, Error> = {
     queryKey: ["skills_filter"],
     queryFn: getSkillsFilter,
+    staleTime: 1000 * 60 * 5, 
+  };
+
+  return useQuery(options);
+}
+export function useSideSkills() {
+  const options: UseQueryOptions<any, Error> = {
+    queryKey: ["side_skills"],
+    queryFn: getSideSkills,
     staleTime: 1000 * 60 * 5, 
   };
 
