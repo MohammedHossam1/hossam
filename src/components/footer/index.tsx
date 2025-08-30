@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="text-xs  text-text">
            Hossam | All rights reserved. © {new Date().getFullYear()}
         </div>
-       
+       {/* x */}
       </div>
     </footer>
   );
