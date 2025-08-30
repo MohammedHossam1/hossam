@@ -21,7 +21,7 @@ const ProjectCard: React.FC<{ project: IProject }> = ({ project }) => {
       )}
       <div className=" px-4 pb-2">
         <h3 className="text-base text-white font-semibold">{project.name}</h3>
-        <p className="text-sm mt-1 line-clamp-3 ">{project.description}</p>
+        <p className="text-sm mt-1 line-clamp-2 lg:line-clamp-3 ">{project.description}</p>
       </div>
     </Link>
   );

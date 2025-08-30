@@ -34,7 +34,6 @@ export default function ProjectDetails({ data, prev, next }: { data: IProject, s
                 <div className="">
                     <SectionHeader title={data.name} />
                     <ImageFallBack src={data.url} alt={data.name} width={1000} height={1000} className="w-full h-full object-cover" />
-
                 </div>
                 {data.images.length > 0 &&
                     <CustomCarousel data={data.images} isProjectDetails={true} />

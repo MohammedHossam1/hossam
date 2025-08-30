@@ -103,7 +103,7 @@ const EDUCATION: Item[] = [
     {
         title: "Route Academy",
         role: "Backend Development (.NET)",
-        data: "2023 – 2025",
+        data: "2023 – 2024",
         description: "Completed the Backend Development course at Route Academy (C#, .NET, Databases).",
     },
 ];
@@ -113,21 +113,21 @@ const WORK: Item[] = [
     {
       title: "Serv5",
       role: "Frontend Developer (Past)",
-      data: "2023 – 2024",
+      data: "2024 – 2025/9",
       description:
         "Built responsive dashboards and landing pages, shipped design systems, and collaborated with backend teams.",
     },
     {
-      title: "EL-Qadi",
+      title: "Qadi-Tech",
       role: "Frontend Developer (Part-time)",
-      data: "2024 – Present",
+      data: "2025 – Present",
       description:
         "Working part-time on React projects, contributing to UI components, and optimizing web performance.",
     },
     {
       title: "Freelance Projects",
       role: "Frontend Engineer",
-      data: "2024 – Present",
+      data: "2025 – Present",
       description:
         "Delivered two independent freelance projects, focusing on React apps, micro-frontends, and clean UI/UX design.",
     },

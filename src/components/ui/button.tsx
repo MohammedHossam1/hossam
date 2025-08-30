@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { LoaderCircle } from "lucide-react"; // لودر بيلف
-
+import { LoaderCircle } from "lucide-react"; 
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -47,17 +47,21 @@ function Button({
   const Comp = asChild ? Slot : "button";
 
   return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size }),"cursor-pointer ", className)}
-      disabled={loading || props.disabled}
-      {...props}
+    <motion.div
+      whileTap={{ scale: 0.97 }}
     >
-      {loading && (
-        <LoaderCircle className="animate-spin size-4" />
-      )}
-      {!loading && children}
-    </Comp>
+      <Comp
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size }), "cursor-pointer ", className)}
+        disabled={loading || props.disabled}
+        {...props}
+      >
+        {loading && (
+          <LoaderCircle className="animate-spin size-4" />
+        )}
+        {!loading && children}
+      </Comp>
+    </motion.div>
   );
 }
 

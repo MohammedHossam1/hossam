@@ -37,7 +37,7 @@ const ProfileImage = () => {
       </div>
 
       <Link href="/" className="mt-3 text-lg xl:text-xl font-bold hover:text-main duration-500 transition-all">Mo Hossam</Link>
-      <p className="text-sm text-gray-400">Front-end Developer</p>
+      <p className="text-sm text-text">Front-end Developer</p>
 
       {/* Fullscreen Preview Modal */}
       <AnimatePresence>
