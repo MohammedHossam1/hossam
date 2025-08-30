@@ -36,7 +36,7 @@ const Hero = () => {
         <div className="relative">
             <div className="absolute bottom-full inset-x-2 lg:inset-x-10 h-3 lg:h-7 bg-dark-2"></div>
 
-            <div className="relative bg-[url('/as.jpg')] text-white bg-cover bg-center h-[60vh] lg:h-[45vh] px-5 lg:px-14 " >
+            <div className="relative bg-[url('/as.jpg')] text-white bg-cover bg-center h-[40vh] lg:h-[45vh] px-5 lg:px-14 " >
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-dark-3/70 rounded-none"></div>
 
