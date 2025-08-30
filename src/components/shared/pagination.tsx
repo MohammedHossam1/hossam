@@ -9,7 +9,6 @@ export default function PaginationContainer({
   totalPages: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  // هل وصلنا لآخر صفحة؟
   const isLastPage = page >= totalPages;
 
   return (
@@ -18,9 +17,9 @@ export default function PaginationContainer({
         aria-label="Load more"
         disabled={isLastPage}
         onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-        className="px-6 py-2 bg-main text-black cursor-pointer disabled:opacity-50  disabled:cursor-auto transition-all duration-200 hover:bg-main/90"
+        className="px-6 py-2 text-main  cursor-pointer disabled:opacity-50  disabled:cursor-auto transition-all duration-200"
       >
-        {isLastPage ? "No more items" : "Load more"}
+        {isLastPage ? "No more Projects" : "Load more"}
       </button>
     </div>
   );
