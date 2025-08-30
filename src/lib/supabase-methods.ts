@@ -23,8 +23,6 @@ export async function getAllProjectSlugs() {
   if (error) throw error;
   return data?.map((d) => d.slug?.trim()) || [];
 }
-
-
 export async function getProjectBySlug(slug: string): Promise<IProject | null> {
   const { data, error } = await supabase
     .from("projects")
@@ -66,4 +64,24 @@ export async function getSkillsFilter() {
   if (error) throw new Error(error.message);
 
   return { data: data as ISkill[], total: count ?? 0 };
+}
+export async function sendMessage(data: { name: string; email: string; message: string }) {
+  if (!data.name || !data.email || !data.message) {
+    throw new Error("All fields are required");
+  }
+
+  const { error } = await supabase
+    .from("contact_messages")
+    .insert([{
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    }]);
+
+  if (error) {
+    console.error("Supabase insert error:", error.message);
+    return { success: false, error: error.message };
+  }
+
+  return { success: true };
 }

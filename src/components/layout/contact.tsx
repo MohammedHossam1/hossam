@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { FaUser } from "react-icons/fa";
+import { Button } from "../ui/button";
+import { sendMessage } from "@/lib/supabase-methods";
 
 const schema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -25,14 +27,24 @@ const ContactForm = () => {
         resolver: zodResolver(schema),
     });
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
-        toast("MSG Sent Successfully", {
+    const onSubmit = async (data: FormData) => {
+        const result = await sendMessage(data);
+        if (!result.success) {
+            toast("Failed to send message", {
+                icon: "❌",
+                className: " !gap-5",
+                description: result.error,
+                position: "top-center",
+            });
+            return;
+        }
+
+        toast("Message sent successfully ✅", {
             icon: <CheckCircle className="text-green-600 " />,
             className: " !gap-5",
-            description: "Sunday, December 03, 2023 at 9:00 AM",
+            description: new Date().toLocaleString(),
             position: "top-center",
-        })
+        });
     };
 
     return (
@@ -64,7 +76,7 @@ const ContactForm = () => {
                 <div>
                     <div className="flex ">
                         <label className="flex items-center gap-2 text-sm  p-5 bg-dark-1">
-                            <MdAlternateEmail className="size-3"/>
+                            <MdAlternateEmail className="size-3" />
                         </label>
                         <input
                             type="email"
@@ -100,12 +112,13 @@ const ContactForm = () => {
                 </div>
 
                 {/* Submit */}
-                <button
+                <Button
                     type="submit"
-                    className="bg-main text-dark-1 px-8 py-4 cursor-pointer  text-xs font-bold tracking-widest   w-fit  hover:opacity-80 transition"
+                    
+                    className="bg-main text-dark-1 px-8 !py-6 cursor-pointer  text-xs font-bold tracking-widest   w-fit  hover:opacity-80 transition"
                 >
                     SEND MESSAGE
-                </button>
+                </Button>
             </form>
         </div>
     );

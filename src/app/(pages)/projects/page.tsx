@@ -50,7 +50,7 @@ const Projects = () => {
   return (
     <section className="w-full py-10 relative min-h-[100dvh]">
       {/* Header & Tabs */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-2">
         <SectionHeader title="Projects" />
 
         {/* Tabs on large screens */}
