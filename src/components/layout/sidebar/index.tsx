@@ -85,6 +85,7 @@ const SideBar = () => {
                 <motion.div
                   className="bg-main h-1 rounded"
                   initial={{ width: 0 }}
+                  viewport={{ once: true }}
                   animate={{ width: `${skill.percent}%` }}
                   transition={{ duration: 2, ease: "easeOut" ,delay:1}}
                 />

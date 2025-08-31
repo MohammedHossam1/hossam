@@ -48,7 +48,7 @@ const Projects = () => {
   const totalPages = Math.ceil((data?.total ?? 0) / limit);
 
   return (
-    <section className="w-full py-10 relative min-h-[100dvh]">
+    <section className="w-full py-3 lg:py-10 relative min-h-[100dvh]">
       {/* Header & Tabs */}
       <div className="flex justify-between items-center mb-2">
         <SectionHeader title="Projects" />

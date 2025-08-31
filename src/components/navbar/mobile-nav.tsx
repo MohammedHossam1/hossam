@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { DialogTitle } from '@radix-ui/react-dialog'
 import SideBar from '../layout/sidebar'
+import Link from 'next/link'
 
 const MobileNav = () => {
     const { isOpen, open, close } = useNavbarStore();
@@ -42,6 +43,9 @@ const MobileNav = () => {
                 </SheetContent>
             </Sheet>
             }
+            <Link href="/" className="lg:hidden">
+                <h1 className="font-bold text-xl uppercase tracking-widest hover:text-main cursor-pointer block duration-500 transition-all">Fayyad</h1>
+            </Link>
             {/* Main Navbar */}
             {isLG && <Sheet open={isOpen} onOpenChange={(openState) => {
                 if (openState) open();
