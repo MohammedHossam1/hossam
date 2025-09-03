@@ -146,8 +146,8 @@ export default function ExperienceTimeline({
     return (
         <main className="mx-auto max-w-6xl ">
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4  xl:gap-10">
-                <TimelineColumn title="Education" items={education} />
                 <TimelineColumn title="Work History" items={work} />
+                <TimelineColumn title="Education" items={education} />
             </section>
         </main>
     );

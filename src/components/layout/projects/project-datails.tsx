@@ -19,6 +19,7 @@ export type IProject = {
     demo: string; // live url
 };
 export default function ProjectDetails({ data, prev, next }: { data: IProject, slug: string, prev: string | null, next: string | null }) {
+    
     const [expanded, setExpanded] = useState(false);
 
     const SectionHead = ({ title }: { title: string }) => {
