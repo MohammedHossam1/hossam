@@ -123,6 +123,7 @@ const Projects = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
+              className="h-full "
             >
               <ProjectCard project={project} />
             </motion.div>
