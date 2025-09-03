@@ -30,7 +30,11 @@ export default function ProjectDetails({ data, prev, next }: { data: IProject, s
         )
     }
     return (
-        <section className="w-full py-5 relative">
+        <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="w-full py-5 relative">
             <div className="space-y-3 lg:space-y-8 ">
                 <div className="">
                     <SectionHeader title={data.name} />
@@ -52,7 +56,7 @@ export default function ProjectDetails({ data, prev, next }: { data: IProject, s
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{
                                             opacity: 1,
-                                            height: expanded ? "auto" : 96 // 4 أسطر تقريبًا × line-height ~24px = 96px
+                                            height: expanded ? "auto" : 96
                                         }}
                                         exit={{ opacity: 0, height: 0 }}
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -116,6 +120,6 @@ export default function ProjectDetails({ data, prev, next }: { data: IProject, s
 
 
             </div >
-        </section >
+        </motion.section >
     );
 }

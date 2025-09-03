@@ -10,7 +10,7 @@ const ProfileImage = () => {
 
   return (
     <div className="bg-dark-3 w-full flex flex-col items-center py-8">
-      <div className="relative group cursor-pointer" onClick={() => setPreviewOpen(true)}>
+      <div className="relative group cursor-pointer z-1000" onClick={() => setPreviewOpen(true)}>
         <motion.div layoutId="profile-image">
           <ImageFallBack
             width={150}

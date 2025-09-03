@@ -62,8 +62,8 @@ export function CustomCarousel({
                   <ProjectCard project={item} />
                 </CarouselItem>
               ))}
-              <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 px-6">
-                <Link href={`/projects`} className="bg-card text-white tracking-widest shadow-lg flex flex-col gap-4 h-full items-center justify-center transition-all duration-300">
+              <CarouselItem className="w-full basis-full md:basis-1/2 lg:basis-1/3 group">
+                <Link href={`/projects`} className="bg-card text-white tracking-widest group-hover:text-main shadow-lg flex flex-col h-full items-center justify-center transition-all duration-300">
                   All Projects
                 </Link>
               </CarouselItem>
