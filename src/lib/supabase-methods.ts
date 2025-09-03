@@ -8,7 +8,7 @@ export async function getProjects(page: number, limit: number): Promise<{ data: 
   const { data, error, count } = await supabase
     .from("projects")
     .select("*", { count: "exact" })
-    .order("priority", { ascending: false })
+    .order("priority", { ascending: true })
     .range(from, to);
 
   if (error) throw new Error(error.message);

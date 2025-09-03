@@ -17,8 +17,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Next Starter",
-  description: "next-starter",
+  title: "Mohammed Hossam",
+  description: "Mohammed Hossam Fayyad Portfolio",
   icons: {
     icon: "/favicon.ico",
   },

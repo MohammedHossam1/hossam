@@ -2,9 +2,10 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Button } from "../ui/button"
+import { motion } from "framer-motion"
 
 const Hero = () => {
-    const fullText = "create web apps with ease."
+    const fullText = "Modern web apps, built right"
     const [displayText, setDisplayText] = useState("")
     const [isDeleting, setIsDeleting] = useState(false)
     const [index, setIndex] = useState(0)
@@ -32,45 +33,60 @@ const Hero = () => {
         return () => clearTimeout(handle)
     }, [index, isDeleting])
 
+    // Animation variants
+    const container = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.3, delayChildren: 0.5 }
+        }
+    }
+
+    const item = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    }
+
     return (
         <div className="relative">
             <div className="absolute bottom-full inset-x-2 lg:inset-x-10 h-3 lg:h-7 bg-dark-2"></div>
 
-            <div className="relative bg-[url('/as.jpg')] text-white bg-cover bg-center h-[40vh] lg:h-[45vh] px-5 lg:px-14 " >
+            <div className="relative bg-[url('/as.jpg')] text-white bg-cover bg-center h-[40vh] lg:h-[45vh] px-5 lg:px-14 ">
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-dark-3/70 rounded-none"></div>
 
                 {/* Content */}
-                <div className="relative xl:w-4/7 h-full flex flex-col justify-center gap-3 lg:gap-5">
-                    <h1 className="text-5xl font-extrabold">
-                        Explore My  World!
-                    </h1>
-                    <p className="text-sm font-mono  lg:tracking-widest flex items-center gap-1">
-                        {" <"} <span className="text-main  ">{"code"}</span> {">"}{" "}
+                <motion.div
+                    variants={container}
+                    initial="hidden"
+                    animate="visible"
+                    className="relative xl:w-4/7 h-full flex flex-col justify-center gap-3 lg:gap-5"
+                >
+                    <motion.h1
+                        variants={item}
+                        className="text-5xl font-extrabold"
+                    >
+                        Explore My World!
+                    </motion.h1>
+
+                    <motion.p
+                        variants={item}
+                        className="text-[12px] sm:text-sm font-mono lg:tracking-widest flex items-center gap-1"
+                    >
+                        {" <"} <span className="text-main">{"code"}</span> {">"}{" "}
                         {displayText}
                         <span className=" animate-pulse">|</span>
-                        {" </"} <span className="text-main  ">{"code"}</span> {">"}
-                    </p>
-                    <Link href="/projects" className="block !font-bold ">
-                        <Button className="w-fit !px-10 !py-5 tracking-wider  uppercase text-black/90  !font-semibold ">Explore now</Button>
-                    </Link>
-                </div>
-                {/* <div className=" relative ">
-                    <Image
-                        src="/removed.png"
-                        alt="Hero"
-                        width={2220}
-                        height={2120}
-                        className="w-full h-full object-cover opacity-0"
-                    />
-                    <Image
-                        src="/removed.png"
-                        alt="Hero"
-                        width={2220}
-                        height={2120}
-                        className=" object-cover absolute -top-3 scale-110"
-                    />
-                </div> */}
+                        {" </"} <span className="text-main">{"code"}</span> {">"}
+                    </motion.p>
+
+                    <motion.div variants={item}>
+                        <Link href="/projects" className="block !font-bold ">
+                            <Button className="w-fit !px-10 !py-5 tracking-wider uppercase text-black/90 !font-semibold">
+                                Explore now
+                            </Button>
+                        </Link>
+                    </motion.div>
+                </motion.div>
             </div>
         </div>
     )

@@ -20,13 +20,13 @@ const ProjectNextPrevContact = ({ next, prev }: { next: string, prev: string }) 
                 </div>
             </div>
             <div className="py-7 px-5  bg-card flex justify-between">
-                <Link href={"/projects/"+prevTrimed} className='text-main text-nowrap  text-xs font-semibold lg:tracking-widest uppercase flex gap-2 items-center group'>
-                    <IoIosArrowBack className='max-lg:hidden group-hover:-translate-x-1 transition-all duration-300 font-extrabold' />  Previous project
+                <Link href={"/projects/"+prevTrimed} className='text-main text-nowrap  text-xs font-semibold lg:tracking-widest uppercase flex gap-2 items-center group text-[11px]'>
+                    <IoIosArrowBack className='max-lg:hidden group-hover:-translate-x-1 transition-all duration-300 font-extrabold ' />  Previous project
                 </Link>
-                <Link href="/projects" className='text-text  text-nowrap text-xs font-semibold lg:tracking-widest uppercase flex gap-2 items-center hover:text-white transition-all                duration-900'>
+                <Link href="/projects" className='text-text  text-nowrap text-[11px] sm:text-xs font-semibold lg:tracking-widest uppercase flex gap-2 items-center hover:text-white transition-all                duration-900'>
                     All projects
                 </Link>
-                <Link href={"/projects/" + nextTrimed} className='text-main text-nowrap text-xs font-semibold lg:tracking-widest uppercase flex gap-2 items-center group'>
+                <Link href={"/projects/" + nextTrimed} className='text-main text-nowrap text-xs font-semibold lg:tracking-widest uppercase flex gap-2 items-center group text-[11px]'>
                     Next project  <IoIosArrowBack className=' max-lg:hidden group-hover:translate-x-1 transition-all duration-300 font-extrabold rotate-180' />
                 </Link>
             </div>
