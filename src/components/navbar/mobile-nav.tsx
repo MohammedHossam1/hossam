@@ -10,6 +10,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { DialogTitle } from '@radix-ui/react-dialog'
+import { motion, AnimatePresence } from 'framer-motion'
 import SideBar from '../layout/sidebar'
 import Link from 'next/link'
 
@@ -26,40 +27,76 @@ const MobileNav = () => {
     }, [])
 
     return (
-        <div className="lg:!hidden w-full flex items-center justify-between p-5   relative">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            layout
+            className="lg:!hidden w-full flex items-center justify-between p-5 relative"
+        >
 
-            {/* Profile Sidebar */}
-            {isLG && <Sheet open={isOpenProfile} onOpenChange={(openState) => {
-                if (openState) openProfile();
-                else closeProfile();
-            }}>
-                <SheetTrigger className="!border-0" asChild>
-                    <EllipsisVertical className="size-5 hover:text-white duration-300 transition-all cursor-pointer" />
-                </SheetTrigger>
-                <SheetContent side="left" className="bg-dark-1 !border-0 text-white w-72">
-                    {/* لازم DialogTitle يكون هنا */}
-                    <DialogTitle className="sr-only">Profile Sidebar</DialogTitle>
-                    <SideBar />
-                </SheetContent>
-            </Sheet>
-            }
-            <Link href="/" className="lg:hidden">
-                <h1 className="font-bold text-xl uppercase tracking-widest hover:text-main cursor-pointer block duration-500 transition-all">Fayyad</h1>
-            </Link>
-            {/* Main Navbar */}
-            {isLG && <Sheet open={isOpen} onOpenChange={(openState) => {
-                if (openState) open();
-                else close();
-            }}>
-                <SheetTrigger className="!border-0" asChild>
-                    <HiMenu className="size-5  cursor-pointer" />
-                </SheetTrigger>
-                <SheetContent side="right" className="bg-dark-1 !border-0 text-white w-64">
-                    <DialogTitle className="sr-only">Main Navigation</DialogTitle>
-                    <Navbar />
-                </SheetContent>
-            </Sheet>}
-        </div>
+            <AnimatePresence>
+                {isLG && (
+                    <motion.div
+                        key="profile"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Sheet open={isOpenProfile} onOpenChange={(openState) => {
+                            if (openState) openProfile();
+                            else closeProfile();
+                        }}>
+                            <SheetTrigger className="!border-0" asChild>
+                                <EllipsisVertical className="size-5 hover:text-white duration-300 transition-all cursor-pointer" />
+                            </SheetTrigger>
+                            <SheetContent side="left" className="bg-dark-1 !border-0 text-white w-72">
+                                <DialogTitle className="sr-only">Profile Sidebar</DialogTitle>
+                                <SideBar />
+                            </SheetContent>
+                        </Sheet>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            {/* كلمة Fayyad */}
+            <motion.div
+                layout
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+            >
+                <Link href="/">
+                    <h1 className="font-bold text-xl uppercase tracking-widest hover:text-main cursor-pointer block duration-500 transition-all">
+                        Fayyad
+                    </h1>
+                </Link>
+            </motion.div>
+
+            <AnimatePresence>
+                {isLG && (
+                    <motion.div
+                        key="menu"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Sheet open={isOpen} onOpenChange={(openState) => {
+                            if (openState) open();
+                            else close();
+                        }}>
+                            <SheetTrigger className="!border-0" asChild>
+                                <HiMenu className="size-5 cursor-pointer" />
+                            </SheetTrigger>
+                            <SheetContent side="right" className="bg-dark-1 !border-0 text-white w-64">
+                                <DialogTitle className="sr-only">Main Navigation</DialogTitle>
+                                <Navbar />
+                            </SheetContent>
+                        </Sheet>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     )
 }
 
