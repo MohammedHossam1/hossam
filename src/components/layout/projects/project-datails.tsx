@@ -19,7 +19,7 @@ export type IProject = {
     demo: string; // live url
 };
 export default function ProjectDetails({ data, prev, next }: { data: IProject, slug: string, prev: string | null, next: string | null }) {
-    
+
     const [expanded, setExpanded] = useState(false);
 
     const SectionHead = ({ title }: { title: string }) => {
@@ -31,14 +31,14 @@ export default function ProjectDetails({ data, prev, next }: { data: IProject, s
     }
     return (
         <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="w-full py-5 relative">
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="w-full py-5 relative">
             <div className="space-y-3 lg:space-y-8 ">
                 <div className="">
                     <SectionHeader title={data.name} />
-                    <ImageFallBack src={data.url} alt={data.name} width={1000} height={1000} className="w-full h-full object-cover" />
+                    <ImageFallBack src={data.url?.trim()} alt={data.name} width={1000} height={1000} className="w-full h-full object-cover" />
                 </div>
                 {data.images.length > 0 &&
                     <CustomCarousel data={data.images} isProjectDetails={true} />

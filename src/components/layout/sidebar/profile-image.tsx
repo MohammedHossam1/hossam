@@ -2,8 +2,8 @@
 import ImageFallBack from '@/components/shared/image-fall-back'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { Eye } from 'lucide-react'
 import Link from 'next/link'
+import { MdOutlineZoomOutMap } from "react-icons/md";
 
 const ProfileImage = () => {
   const [previewOpen, setPreviewOpen] = useState(false)
@@ -23,7 +23,7 @@ const ProfileImage = () => {
 
         {/* overlay icon on hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition rounded-full">
-          <Eye className="text-white size-6" />
+          <MdOutlineZoomOutMap className="text-white size-6" />
         </div>
 
         {/* online indicator */}
