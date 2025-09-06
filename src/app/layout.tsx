@@ -7,22 +7,50 @@ import MobileNav from "@/components/navbar/mobile-nav";
 import { Toaster } from "@/components/ui/sonner";
 import ReactQueryProvider from "@/lib/reactquery-provider";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Saira } from "next/font/google";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const poppins = Poppins({
-  variable: "--font-almarai",
+// const poppins = Poppins({
+//   variable: "--font-almarai",
+//   subsets: ["latin"],
+//   weight: ["300", "400", "700", "800"],
+// });
+const saira = Saira({
   subsets: ["latin"],
-  weight: ["300", "400", "700", "800"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
-  title: "Mohammed Hossam",
-  description: "Mohammed Hossam Fayyad Portfolio",
+  title: "Mohammed Hossam | Frontend Developer",
+  description:
+    "Mohammed Hossam Fayyad - Frontend Developer متخصص في بناء مواقع ويب حديثة باستخدام React, Next.js, Tailwind CSS. استعرض أعمالي ومشاريعي الاحترافية.",
   icons: {
     icon: "/favicon.ico",
   },
+  openGraph: {
+    title: "Mohammed Hossam | Frontend Developer",
+    description:
+      "Frontend Developer متخصص في تطوير مواقع ويب حديثة باستخدام React, Next.js, Tailwind CSS. هنا تقدر تشوف المشاريع اللي اشتغلت عليها.",
+    url: "https://mohammedhossam.site",
+    siteName: "Mohammed Hossam Portfolio",
+    images: [
+      {
+        url: "/preview.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mohammed Hossam Portfolio Preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mohammed Hossam | Frontend Developer",
+    description:
+      "Frontend Developer متخصص في بناء مواقع ويب حديثة باستخدام React, Next.js, Tailwind CSS.",
+    images: ["/preview.jpg"],
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -33,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
+        className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >
         <ReactQueryProvider>
 
