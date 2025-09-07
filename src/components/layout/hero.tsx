@@ -89,8 +89,11 @@ const Hero = () => {
                     </motion.div>
                 </motion.div>
                 {/* الصورة */}
-                <div className="relative w-full max-2xl:hidden">
-                 
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="relative w-full max-2xl:hidden group">
                     <div className="absolute bottom-4 -translate-x-20 h-full z-0">
                         <ImageFallBack
                             width={1500}
@@ -99,8 +102,10 @@ const Hero = () => {
                             alt="avatar"
                             className="w-full h-full  scale-110 "
                         />
+                  
                     </div>
-                </div>
+                </motion.div>
+
             </div>
         </div>
     )
