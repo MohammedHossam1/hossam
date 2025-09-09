@@ -57,9 +57,6 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
-      >
         <head>
           <Script
             defer
@@ -67,6 +64,9 @@ export default function RootLayout({
             src="https://plausible.io/js/script.js"
           />
         </head>
+      <body
+        className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
+      >
         <ReactQueryProvider>
 
           <MobileNav />
