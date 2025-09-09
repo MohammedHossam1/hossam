@@ -9,6 +9,7 @@ import ReactQueryProvider from "@/lib/reactquery-provider";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Metadata } from "next";
 import { Saira } from "next/font/google";
+import Script from "next/script";
 
 
 const saira = Saira({
@@ -59,7 +60,13 @@ export default function RootLayout({
       <body
         className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >
-        <script defer data-domain="mohammedhossam.site" src="https://plausible.io/js/script.js"></script>
+        <head>
+          <Script
+            defer
+            data-domain="mohammedhossam.site"
+            src="https://plausible.io/js/script.js"
+          />
+        </head>
         <ReactQueryProvider>
 
           <MobileNav />
