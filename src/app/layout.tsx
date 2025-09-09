@@ -6,15 +6,11 @@ import Navbar from "@/components/navbar";
 import MobileNav from "@/components/navbar/mobile-nav";
 import { Toaster } from "@/components/ui/sonner";
 import ReactQueryProvider from "@/lib/reactquery-provider";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Metadata } from "next";
 import { Saira } from "next/font/google";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-// const poppins = Poppins({
-//   variable: "--font-almarai",
-//   subsets: ["latin"],
-//   weight: ["300", "400", "700", "800"],
-// });
+
 const saira = Saira({
   subsets: ["latin"],
   weight: ["400"],
@@ -63,9 +59,9 @@ export default function RootLayout({
       <body
         className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >
+        <script defer data-domain="mohammedhossam.site" src="https://plausible.io/js/script.js"></script>
         <ReactQueryProvider>
 
-          {/* Mobile nav */}
           <MobileNav />
           <div className="relative flex  gap-3 xl:gap-7 lg:h-[95vh] w-full rounded-2xl shadow-lg bg-dark-2/70">
             <div
@@ -95,7 +91,6 @@ export default function RootLayout({
           <ReactQueryDevtools initialIsOpen={false} />
 
         </ReactQueryProvider>
-
       </body>
 
     </html>
