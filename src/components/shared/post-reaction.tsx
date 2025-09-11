@@ -1,6 +1,6 @@
+'use client'
 import { HandHeart, Heart, Laugh, Lightbulb, PartyPopper, ThumbsUp } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
-
 interface Reaction {
   id: string;
   icon: React.ReactNode;
@@ -62,8 +62,14 @@ const reactions: Reaction[] = [
 ];
 
 export default function PostReaction({ initialCount = 0, onReactionChange, initialReaction }: PostReactionProps) {
-  const longPressDuration = 500; 
-  const audio = new Audio('/like.mp3'); 
+  const longPressDuration = 500;
+  const playReactionSound = () => {
+    if (typeof window !== "undefined") {
+      const audio = new Audio('/like.mp3');
+      audio.play().catch(() => { });
+    }
+  };
+
   const [reactionCount, setReactionCount] = useState(initialCount);
   const [showReactions, setShowReactions] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -109,7 +115,7 @@ export default function PostReaction({ initialCount = 0, onReactionChange, initi
 
   const handleReactionClick = (reaction: Reaction) => {
     setIsAnimating(true);
-    audio.play().catch(() => {}); 
+    playReactionSound(); 
 
     if (selectedReaction?.id === reaction.id) {
       // Remove reaction if clicking the same one
