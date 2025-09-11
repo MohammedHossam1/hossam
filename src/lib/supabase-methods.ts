@@ -100,7 +100,7 @@ export async function addOrUpdateReaction(projectId: string, ip: string, reactio
 
   if (existing) {
     if (reactionType === null || existing.reaction_type === reactionType) {
-      // لو عايز يشيل الريأكت
+      // Remove the reaction
       const { error: deleteError } = await supabase
         .from("reactions")
         .delete()
@@ -108,7 +108,7 @@ export async function addOrUpdateReaction(projectId: string, ip: string, reactio
       if (deleteError) throw new Error(deleteError.message);
       return { success: true, action: "removed" };
     } else {
-      // لو هيغير الريأكت
+      // Update the reaction
       const { error: updateError } = await supabase
         .from("reactions")
         .update({ reaction_type: reactionType })
@@ -117,7 +117,7 @@ export async function addOrUpdateReaction(projectId: string, ip: string, reactio
       return { success: true, action: "updated" };
     }
   } else {
-    // أول مرة يضيف
+    // Add the reaction
     const { error: insertError } = await supabase
       .from("reactions")
       .insert([{ project_id: projectId, ip_address: ip, reaction_type: reactionType }]);

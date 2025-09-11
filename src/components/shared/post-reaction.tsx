@@ -62,17 +62,30 @@ const reactions: Reaction[] = [
 ];
 
 export default function PostReaction({ initialCount = 0, onReactionChange, initialReaction }: PostReactionProps) {
+  const longPressDuration = 500; 
+  const audio = new Audio('/like.mp3'); 
   const [reactionCount, setReactionCount] = useState(initialCount);
   const [showReactions, setShowReactions] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const longPressRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedReaction, setSelectedReaction] = useState<Reaction | null>(null);
   useEffect(() => {
     setReactionCount(initialCount);
   }, [initialCount]);
 
-  
+  const handleTouchStart = () => {
+    longPressRef.current = setTimeout(() => {
+      setShowReactions(true);
+    }, longPressDuration);
+  };
+
+  const handleTouchEnd = () => {
+    if (longPressRef.current) {
+      clearTimeout(longPressRef.current);
+    }
+  };
   useEffect(() => {
     if (initialReaction) {
       setSelectedReaction(reactions.find(r => r.id === initialReaction) ?? null);
@@ -96,6 +109,7 @@ export default function PostReaction({ initialCount = 0, onReactionChange, initi
 
   const handleReactionClick = (reaction: Reaction) => {
     setIsAnimating(true);
+    audio.play().catch(() => {}); 
 
     if (selectedReaction?.id === reaction.id) {
       // Remove reaction if clicking the same one
@@ -143,6 +157,8 @@ export default function PostReaction({ initialCount = 0, onReactionChange, initi
       className="relative inline-block"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Reaction Options Popup */}
       <div
