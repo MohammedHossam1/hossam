@@ -1,92 +1,67 @@
-'use client'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-
-const schema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email'),
-  phone: z.string().min(1, 'Phone is required'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  repassword: z.string().min(6, 'Please confirm your password'),
-}).refine((data) => data.password === data.repassword, {
-  message: "Passwords don't match",
-  path: ['repassword'],
-})
-
-type FormData = z.infer<typeof schema>
-
-const Validation = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  })
-
-  const onSubmit = (data: FormData) => {
-    // handle form submission
-    console.log(data)
-  }
-
-  return (
-    <form className="" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div>
-        <Input
-          {...register('name')}
-          placeholder="Name"
-        />
-        {errors.name && (
-          <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
-        )}
-      </div>
-      <div>
-        <Input
-          {...register('email')}
-          placeholder="Email"
-          type="email"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
-        )}
-      </div>
-      <div>
-        <Input
-          {...register('phone')}
-          placeholder="Phone"
-        />
-        {errors.phone && (
-          <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
-        )}
-      </div>
-      <div>
-        <Input
-          {...register('password')}
-          placeholder="Password"
-          type="password"
-        />
-        {errors.password && (
-          <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
-        )}
-      </div>
-      <div>
-        <Input
-          {...register('repassword')}
-          placeholder="Confirm Password"
-          type="password"
-        />
-        {errors.repassword && (
-          <p className="text-red-500 text-xs mt-1">{errors.repassword.message}</p>
-        )}
-      </div>
-      <Button type="submit">
-        Submit
-      </Button>
-    </form>
-  )
+"use client";
+       
+interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  error?: string;
 }
 
-export default Validation
+const CustomInput = ({
+  label,
+  error,
+  type,
+  ...props
+}: IInputProps) => {
+  return (
+    <div className=" ">
+      <label className="block mb-1 font-medium">{label}</label>
+      <div className="relative">
+        <input
+          {...props}
+          type={type}
+          className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    </div>
+  );
+};
+
+export default function Signup() {
+
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4 w-1/2">
+      <form
+        className="bg-white p-8 rounded-2xl shadow-lg w-full space-y-4"
+      >
+        <h2 className="text-3xl font-bold text-center mb-6">Create Account</h2>
+
+        <CustomInput
+          label="Name"
+          type="text"
+        />
+
+        <CustomInput
+          label="Email"
+          type="email"
+        />
+
+        <CustomInput
+          label="Password"
+        />
+
+        <CustomInput
+          label="Confirm Password"
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  );
+}
+  

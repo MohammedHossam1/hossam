@@ -1,16 +1,28 @@
-import React from "react";
-import ImageFallBack from "../../shared/image-fall-back";
+import PostReaction from "@/components/shared/post-reaction";
+import { addOrUpdateReaction } from "@/lib/supabase-methods";
 import { IProject } from "@/types";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import React from "react";
+import ImageFallBack from "../../shared/image-fall-back";
+import { useGetClientIp, useGetProjectReactions } from "@/hooks";
 
 const ProjectCard: React.FC<{ project: IProject }> = ({ project }) => {
-  return (
-    <motion.div 
-    whileTap={{ scale: 0.97 }}
-    className=" h-full group">
+  const { data: ip } = useGetClientIp();
+  const { data: reactions } = useGetProjectReactions(project.id, ip ?? "");
+  const handleReactionChange = async (reaction: any) => {
+    try {
+      if (!ip) return;
+      await addOrUpdateReaction(project.id, ip, reaction ? reaction.id : null);
+    } catch (err) {
+      console.error("Failed to update reaction:", err);
+    }
+  };
 
-      <Link href={`/projects/${project.slug}`} className="bg-card  text-text shadow-lg flex flex-col gap-4 h-full transition-all duration-300">
+  return (
+    <motion.div
+      className=" h-full group">
+      <div className="bg-card  text-text shadow-lg flex flex-col gap-4 h-full transition-all duration-300">
         {project.url && (
           <div className="w-full relative h-40 overflow-hidden ">
             <ImageFallBack
@@ -25,10 +37,18 @@ const ProjectCard: React.FC<{ project: IProject }> = ({ project }) => {
           </div>
         )}
         <div className=" px-4 pb-2">
-          <h3 className="text-base text-white group-hover:text-main transition-all duration-700 font-semibold">{project.name}</h3>
-          <p className="text-sm mt-1 line-clamp-2 lg:line-clamp-3 ">{project.description}</p>
+          <div className="flex gap-2 items-center justify-between pb-2" >
+
+            <Link href={`/projects/${project.slug}`} className="text-base text-white group-hover:text-main transition-all duration-700 font-semibold">{project.name}</Link>
+            <PostReaction
+              initialCount={Object.values(reactions?.counts ?? {}).reduce((a, b) => a + b, 0)}
+              initialReaction={reactions?.userReaction ?? null}
+              onReactionChange={handleReactionChange}
+            />
+          </div>
+          <Link href={`/projects/${project.slug}`} className="text-sm mt-1 line-clamp-2 lg:line-clamp-3 ">{project.description}</Link>
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 };

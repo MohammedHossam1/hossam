@@ -29,7 +29,7 @@ const ProfileImage = () => {
         {/* online indicator */}
         <div
           className="absolute bottom-1 end-2 flex items-center justify-center -space-x-3"
-          title="Online"
+          title="Available"
         >
           <div className="size-3 rounded-full bg-main"></div>
           <div className="size-3 rounded-full bg-main animate-ping"></div>

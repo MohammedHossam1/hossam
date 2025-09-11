@@ -85,3 +85,64 @@ export async function sendMessage(data: { name: string; email: string; message: 
 
   return { success: true };
 }
+
+export async function addOrUpdateReaction(projectId: string, ip: string, reactionType: string | null) {
+  const { data: existing, error: fetchError } = await supabase
+    .from("reactions")
+    .select("*")
+    .eq("project_id", projectId)
+    .eq("ip_address", ip)
+    .single();
+
+  if (fetchError && fetchError.code !== "PGRST116") {
+    throw new Error(fetchError.message);
+  }
+
+  if (existing) {
+    if (reactionType === null || existing.reaction_type === reactionType) {
+      // لو عايز يشيل الريأكت
+      const { error: deleteError } = await supabase
+        .from("reactions")
+        .delete()
+        .eq("id", existing.id);
+      if (deleteError) throw new Error(deleteError.message);
+      return { success: true, action: "removed" };
+    } else {
+      // لو هيغير الريأكت
+      const { error: updateError } = await supabase
+        .from("reactions")
+        .update({ reaction_type: reactionType })
+        .eq("id", existing.id);
+      if (updateError) throw new Error(updateError.message);
+      return { success: true, action: "updated" };
+    }
+  } else {
+    // أول مرة يضيف
+    const { error: insertError } = await supabase
+      .from("reactions")
+      .insert([{ project_id: projectId, ip_address: ip, reaction_type: reactionType }]);
+    if (insertError) throw new Error(insertError.message);
+    return { success: true, action: "added" };
+  }
+}
+
+export async function getProjectReactions(projectId: string, ip: string) {
+  const { data, error } = await supabase
+    .from("reactions")
+    .select("reaction_type, ip_address")
+    .eq("project_id", projectId);
+
+  if (error) throw new Error(error.message);
+
+  const counts: Record<string, number> = {};
+  let userReaction: string | null = null;
+
+  data?.forEach(r => {
+    counts[r.reaction_type] = (counts[r.reaction_type] || 0) + 1;
+    if (r.ip_address === ip) {
+      userReaction = r.reaction_type;
+    }
+  });
+
+  return { counts, userReaction };
+}

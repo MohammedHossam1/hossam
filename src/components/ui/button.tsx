@@ -49,6 +49,7 @@ function Button({
   return (
     <motion.div
       whileTap={{ scale: 0.97 }}
+      className="w-fit"
     >
       <Comp
         data-slot="button"
