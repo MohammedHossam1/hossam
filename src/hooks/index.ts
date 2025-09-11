@@ -1,6 +1,7 @@
-import { getProjectBySlug, getProjects, getSideSkills, getSkills, getSkillsFilter } from "@/lib/supabase-methods";
+import { getProjectBySlug, getProjectReactions, getProjects, getSideSkills, getSkills, getSkillsFilter } from "@/lib/supabase-methods";
+import { getClientIp } from "@/lib/utils";
 import { IProject, ISkill } from "@/types";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 
 type ProjectsQueryData = {
   data: IProject[];
@@ -24,7 +25,7 @@ export function useSkills() {
   const options: UseQueryOptions<SkillsQueryData, Error> = {
     queryKey: ["skills"],
     queryFn: () => getSkills(),
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
   };
 
   return useQuery(options);
@@ -38,7 +39,7 @@ export function useSkillsFilter() {
   const options: UseQueryOptions<SkillsFilterQueryData, Error> = {
     queryKey: ["skills_filter"],
     queryFn: getSkillsFilter,
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
   };
 
   return useQuery(options);
@@ -47,7 +48,7 @@ export function useSideSkills() {
   const options: UseQueryOptions<any, Error> = {
     queryKey: ["side_skills"],
     queryFn: getSideSkills,
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
   };
 
   return useQuery(options);
@@ -57,11 +58,26 @@ export function useGetProjectBySlug(slug: string) {
   const options: UseQueryOptions<IProject | null, Error> = {
     queryKey: ["project_by_slug", slug],
     queryFn: () => getProjectBySlug(slug),
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
     enabled: !!slug,
+  };
 
+  return useQuery(options);
+}
 
-};
+export function useGetProjectReactions(projectId: string, ip: string) {
+  return useQuery({
+    queryKey: ["reactions", projectId, ip],
+    queryFn: () => getProjectReactions(projectId, ip),
+    enabled: !!projectId && !!ip,
+    staleTime: 1000 * 60 * 5,
+  });
+}
 
-return useQuery(options);
+export function useGetClientIp() {
+  return useQuery({
+    queryKey: ["client_ip"],
+    queryFn: () => getClientIp(),
+    staleTime: 1000 * 60 * 5,
+  });
 }

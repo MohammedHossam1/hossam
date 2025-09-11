@@ -39,10 +39,9 @@ const ContactForm = () => {
             return;
         }
 
-        toast("Message sent successfully ✅", {
+        toast("Message sent successfully ", {
             icon: <CheckCircle className="text-green-600 " />,
             className: " !gap-5",
-            description: new Date().toLocaleString(),
             position: "top-center",
         });
     };

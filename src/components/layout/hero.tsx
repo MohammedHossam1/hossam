@@ -52,7 +52,7 @@ const Hero = () => {
         <div className="relative">
             <div className="absolute bottom-full inset-x-2 lg:inset-x-10 h-3 lg:h-7 bg-dark-2"></div>
 
-            <div className="relative bg-[url('/as.png')] text-white bg-cover bg-center h-[40vh] lg:h-[45vh] px-5 lg:px-14 flex  bg-red-200 ">
+            <div className="relative bg-[url('/as.png')] text-white bg-cover bg-center h-[40vh] lg:h-[320px] px-5 lg:px-14 flex  bg-red-200 ">
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-dark-3/30 rounded-none"></div>
 
@@ -61,7 +61,7 @@ const Hero = () => {
                     variants={container}
                     initial="hidden"
                     animate="visible"
-                    className="relative xl:w-full h-full flex flex-col justify-center gap-3 lg:gap-5"
+                    className="relative xl:w-full duration-700 transition-all h-full flex flex-col justify-center gap-3 lg:gap-5"
                 >
                     <motion.h1
                         variants={item}
@@ -72,7 +72,7 @@ const Hero = () => {
 
                     <motion.p
                         variants={item}
-                        className="text-[12px] sm:text-sm font-mono lg:tracking-widest flex items-center gap-1"
+                        className="text-[12px] duration-700 transition-all  text-nowrap sm:text-sm font-mono lg:tracking-widest flex items-center gap-1"
                     >
                         {" <"} <span className="text-main">{"code"}</span> {">"}{" "}
                         {displayText}

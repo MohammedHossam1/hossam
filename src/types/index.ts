@@ -40,3 +40,9 @@ export type ISkill = {
   name: string;
   percent: number;
 };
+export type IReaction = {
+  id: string;
+  project_id: string;
+  reaction_type: string;
+  ip_address: string;
+};

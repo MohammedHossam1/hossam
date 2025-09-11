@@ -57,13 +57,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-        <head>
-          <Script
-            defer
-            data-domain="mohammedhossam.site"
-            src="https://plausible.io/js/script.js"
-          />
-        </head>
+      <head>
+        <Script
+          defer
+          data-domain="mohammedhossam.site"
+          src="https://plausible.io/js/script.js"
+        />
+      </head>
       <body
         className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >
@@ -98,6 +98,9 @@ export default function RootLayout({
           <ReactQueryDevtools initialIsOpen={false} />
 
         </ReactQueryProvider>
+        {/* <Toaster /> */}
+
+        {/* <Validation /> */}
       </body>
 
     </html>
