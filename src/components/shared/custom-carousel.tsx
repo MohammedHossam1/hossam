@@ -14,7 +14,6 @@ import ImageFallBack from "./image-fall-back";
 
 interface IProp {
   dots?: boolean;
-  arrows?: boolean;
   isProjectDetails?: boolean;
   arrowsBottom?: boolean;
   data: any[];
@@ -22,8 +21,6 @@ interface IProp {
 
 export function CustomCarousel({
   dots = true,
-  arrows = false,
-  arrowsBottom = false,
   isProjectDetails = false,
   data = [],
 }: IProp) {
@@ -71,27 +68,19 @@ export function CustomCarousel({
             :
             data.map((item, index) => (
               <CarouselItem key={index} className="w-full basis-full lg:basis-1/2    overflow-hidden ">
-                <ImageFallBack src={item} alt={item} width={500} height={500} className="object-cover w-full max-h-[300px]  h-full  object-top"/>
+                <ImageFallBack src={item} alt={item} width={500} height={500} className="object-cover w-full max-h-[300px]  h-full  object-top" />
               </CarouselItem>
             ))
           }
         </CarouselContent>
-
-        {arrows && (
-          <div
-            className={`flex items-center max-lg:hidden gap-2 ${arrowsBottom && "absolute -bottom-10  translate-x-17 "
-              }`}
-          >
+          <div className="absolute bg-blue-400 right-10 -bottom-4 lg:-bottom-5  z-50 flex items-center gap-2" >
             <CarouselPrevious
-              className={`bg-gradient-blue border-gradient-blue text-white max-xl:opacity-50 focus:opacity-100 hover:opacity-100 -translate-x-3    ${arrowsBottom ? "" : "max-2xl:dtranslate-x-20"
-                } size-12  disabled:bg-transparent  disabled:border-dark-blue  `}
+              className=" text-gray-500 hover:bg-transparent hover:text-main bg-transparent border-0 left-0 "
             />
             <CarouselNext
-              className={`bg-gradient-blue border-gradient-blue text-white max-xl:opacity-50 focus:opacity-100 hover:opacity-100  translate-x-3 ${arrowsBottom ? "" : "max-2xl:-translate-sx-20"
-                } size-12 text-2xl disabled:bg-transparent  disabled:border-dark-blue `}
+              className=" text-gray-500 hover:bg-transparent hover:text-main bg-transparent border-0  "
             />
           </div>
-        )}
       </Carousel>
 
       {dots && (
