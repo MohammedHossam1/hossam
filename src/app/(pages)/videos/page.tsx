@@ -1,7 +1,7 @@
 
 const VideosPage = () => {
   return (
-    <section className="relative  min-h-[calc(100dvh)]">
+    <section className="relative flex items-center justify-center  min-h-[calc(100dvh-70px)] lg:min-h-[calc(100dvh-30px)]">
       No Videos yet
     </section>
   )

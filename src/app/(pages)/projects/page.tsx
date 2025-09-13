@@ -17,16 +17,15 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Projects = () => {
-  // const search = useSearchParams();
+  const limit = 9;
   const [allProjects, setAllProjects] = useState<IProject[]>([]);
-
   const [activeTab, setActiveTab] = useState("all");
   const [page, setPage] = useState(1);
-  const limit = 9;
-
-
+  const [initialLoading, setInitialLoading] = useState(false);
   const { data, isLoading, isError }: any = useProjects(page, limit);
   const { data: skillsData, isError: skillsError }: any = useSkillsFilter();
+
+// handle pagination logic
   useEffect(() => {
     if (data?.data) {
       setAllProjects((prev) => {
@@ -37,13 +36,21 @@ const Projects = () => {
       });
     }
   }, [data, page]);
- 
+  useEffect(() => {
+    if (!isLoading && !initialLoading) {
+      setInitialLoading(true);
+    }
+  }, [isLoading, initialLoading]);
+
   const filteredProjects =
     activeTab === "all"
       ? allProjects
       : allProjects.filter((p: IProject) => p.skills.includes(activeTab));
 
-  if (isLoading) return <Loading />;
+  if (isLoading && !initialLoading) {
+
+    return <Loading />
+  };
   if (isError || skillsError) return <p>Something went wrong</p>;
   const totalPages = Math.ceil((data?.total ?? 0) / limit);
 
@@ -131,7 +138,34 @@ const Projects = () => {
         </AnimatePresence>
       </motion.div>
 
-      <PaginationContainer page={page} setPage={setPage} totalPages={totalPages} />
+      <AnimatePresence mode="wait" >
+        {isLoading && initialLoading ? (
+          <motion.div
+            key="loader"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="mt-10"
+          >
+            <Loading small />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="pagination"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="mt-10"
+
+          >
+            <PaginationContainer page={page} setPage={setPage} totalPages={totalPages} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
     </section>
   );
 };
