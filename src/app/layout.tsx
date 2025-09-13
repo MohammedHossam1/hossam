@@ -54,7 +54,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+console.log("layout")
   return (
     <html lang="en">
       <head>
@@ -68,7 +68,6 @@ export default function RootLayout({
         className={`${saira.className}  antialiased min-h-screen flex max-lg:flex-col lg:gap-2 items-center justify-center lg:custom-container `}
       >
         <ReactQueryProvider>
-
           <MobileNav />
           <div className="relative flex  gap-3 xl:gap-7 lg:h-[95vh] w-full rounded-2xl shadow-lg bg-dark-2/70">
             <div
@@ -96,9 +95,7 @@ export default function RootLayout({
           </div>
           <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
-
         </ReactQueryProvider>
-        {/* <Toaster /> */}
 
         {/* <Validation /> */}
       </body>

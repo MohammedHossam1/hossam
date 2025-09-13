@@ -1,10 +1,10 @@
 "use client"
-import { useSideSkills, useSkills } from '@/hooks';
+import { useSkills } from '@/hooks';
 import { ISkill } from '@/types';
 import { UseQueryResult } from '@tanstack/react-query';
+import { motion } from 'framer-motion';
 import { FaCheck, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import ProfileImage from './profile-image';
-import { motion } from 'framer-motion';
 const address = [
   {
     name: "Egypt",
@@ -19,14 +19,14 @@ const address = [
     title: "Age : "
   }
 ]
+
 const Seperator = () => <div className="w-full h-[1px] bg-text/30 my-5" />
 const SideBar = () => {
   const { data, isLoading, isError }: UseQueryResult<{ data: ISkill[] }, Error> = useSkills();
-  const { data: sideData }: UseQueryResult<{ skill: string }[], Error> = useSideSkills();
   const handleDownload = async () => {
-    if (!sideData || sideData.length === 0) return;
+    if (!data || data?.data.length === 0) return;
     try {
-      const response = await fetch(sideData[0].skill);
+      const response = await fetch(data?.data[data?.data.length - 1].name);
       if (!response.ok) throw new Error("Failed to fetch file");
 
       const blob = await response.blob();
@@ -75,7 +75,7 @@ const SideBar = () => {
             ))
           )}
           {isError && <p>Error loading skills</p>}
-          {!isLoading && !isError && data?.data?.map((skill) => (
+          {!isLoading && !isError && data?.data?.slice(0, -1).map((skill) => (
             <div key={skill.id}>
               <div className="flex justify-between font-medium mb-1">
                 <span className='capitalize'>{skill.name}</span>
@@ -111,7 +111,7 @@ const SideBar = () => {
         </ul>
 
         {/* Download CV */}
-        {!sideData || sideData?.length == 0 ? null :
+        {!data || data?.data?.length == 0 ? null :
           <button
             onClick={handleDownload}
             className="text-text cursor-pointer text-[13px] hover:bg-transparent hover:text-main bg-transparent font-medium text-start w-fit p-0 m-0 tracking-wider"
