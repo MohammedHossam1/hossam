@@ -83,7 +83,7 @@ console.log("layout")
             <div className="max-lg:hidden lg:w-[20%] relative z-3">
               <SideBar />
             </div>
-            <div className="flex-1 overflow-auto hide-scrollbar ">
+            <div className="flex-1  overflow-y-auto overflow-x-hidden  hide-scrollbar ">
               <main className="max-lg:p-2">
                 {children}
               </main>
