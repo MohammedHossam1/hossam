@@ -51,6 +51,7 @@ export async function getSkills() {
   const { data, error, count } = await supabase
     .from("skills")
     .select("*", { count: "exact" })
+    .order("priority", { ascending: true })
 
   if (error) throw new Error(error.message);
 
