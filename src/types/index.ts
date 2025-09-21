@@ -46,3 +46,10 @@ export type IReaction = {
   reaction_type: string;
   ip_address: string;
 };
+export type IVideo = {
+  id: string;
+  video_src: string;
+  title: string;
+  description: string;
+  tag: string;
+};

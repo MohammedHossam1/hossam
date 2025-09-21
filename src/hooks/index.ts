@@ -1,4 +1,4 @@
-import { getProjectBySlug, getProjectReactions, getProjects, getSideSkills, getSkills, getSkillsFilter } from "@/lib/supabase-methods";
+import { getFeaturedVideos, getProjectReactions, getProjects, getSkills, getSkillsFilter, getVideos } from "@/lib/supabase-methods";
 import { getClientIp } from "@/lib/utils";
 import { IProject, ISkill } from "@/types";
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
@@ -44,32 +44,27 @@ export function useSkillsFilter() {
 
   return useQuery(options);
 }
-export function useSideSkills() {
-  const options: UseQueryOptions<any, Error> = {
-    queryKey: ["side_skills"],
-    queryFn: getSideSkills,
-    staleTime: 1000 * 60 * 5,
-  };
 
-  return useQuery(options);
-}
-
-export function useGetProjectBySlug(slug: string) {
-  const options: UseQueryOptions<IProject | null, Error> = {
-    queryKey: ["project_by_slug", slug],
-    queryFn: () => getProjectBySlug(slug),
-    staleTime: 1000 * 60 * 5,
-    enabled: !!slug,
-  };
-
-  return useQuery(options);
-}
 
 export function useGetProjectReactions(projectId: string, ip: string) {
   return useQuery({
     queryKey: ["reactions", projectId, ip],
     queryFn: () => getProjectReactions(projectId, ip),
     enabled: !!projectId && !!ip,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+export function useGetVideos(page = 1, limit = 5) {
+  return useQuery({
+    queryKey: ["videos" + page + limit],
+    queryFn: () => getVideos(page, limit),
+    staleTime: 1000 * 60 * 5,
+  });
+}
+export function useGetFeaturedVideos() {
+  return useQuery({
+    queryKey: ["videos"],
+    queryFn: () => getFeaturedVideos(),
     staleTime: 1000 * 60 * 5,
   });
 }

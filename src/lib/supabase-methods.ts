@@ -1,4 +1,4 @@
-import { IProject, ISkill } from "@/types";
+import { IProject, ISkill, IVideo } from "@/types";
 import { supabase } from "./supabase-client";
 
 export async function getProjects(page: number, limit: number): Promise<{ data: IProject[]; total: number }> {
@@ -35,17 +35,6 @@ export async function getProjectBySlug(slug: string): Promise<IProject | null> {
     return null;
   }
   return data as IProject;
-}
-export async function getSideSkills(): Promise<IProject | null> {
-  const { data, error } = await supabase
-    .from("side_skills")
-    .select("*")
-
-  if (error) {
-    console.error("Error fetching project:", error.message);
-    return null;
-  }
-  return data as any;
 }
 export async function getSkills() {
   const { data, error, count } = await supabase
@@ -126,7 +115,6 @@ export async function addOrUpdateReaction(projectId: string, ip: string, reactio
     return { success: true, action: "added" };
   }
 }
-
 export async function getProjectReactions(projectId: string, ip: string) {
   const { data, error } = await supabase
     .from("reactions")
@@ -146,4 +134,27 @@ export async function getProjectReactions(projectId: string, ip: string) {
   });
 
   return { counts, userReaction };
+}
+export async function getVideos(page: number, limit: number) {
+  const { data, error, count } = await supabase
+    .from("videos")
+    .select("*", { count: "exact" })
+    .order("priority")
+    .range((page - 1) * limit, page * limit - 1)
+
+  if (error) throw new Error(error.message);
+
+  return { data: data as IVideo[], total: count ?? 0 };
+}
+export async function getFeaturedVideos() {
+  const { data, error, count } = await supabase
+    .from("videos")
+    .select("*", { count: "exact" })
+    .order("priority")
+    .limit(7)
+    .eq("featured", true)
+
+  if (error) throw new Error(error.message);
+
+  return { data: data as IVideo[], total: count ?? 0 };
 }
