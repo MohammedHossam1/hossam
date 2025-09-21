@@ -5,6 +5,7 @@ import FeaturedProjects from '../projects/featured-projects'
 import ExperienceTimeline from '../experience'
 import { IProject } from '@/types'
 import { motion } from 'framer-motion'
+import FeaturedReels from '../videos/featured-videos'
 
 const HomeUI = ({ data }: { data?: IProject[] }) => {
     return (
@@ -16,6 +17,7 @@ const HomeUI = ({ data }: { data?: IProject[] }) => {
             className="relative z-2 py-5 lg:py-16 space-y-8">
             <Hero />
             <FeaturedProjects data={data || []} />
+            <FeaturedReels  />
             <ExperienceTimeline />
         </motion.div>
     )

@@ -52,7 +52,7 @@ const Navbar = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-dark-1/50 z-2"
+                        className="fixed inset-0 bg-dark-1/50 z-1"
                         onClick={() => toggle()}
                     />
                 )}
@@ -62,7 +62,7 @@ const Navbar = () => {
                     width: isMoreThanLG ? (isOpen ? 250 : 70) : '100%',
                 }}
                 transition={{ stiffness: 200, damping: 20, duration: .7 }}
-                className="h-full bg-dark-2 text-white min-w-[70px] shadow-lg overflow-hidden relative z-2"
+                className="h-full bg-dark-2 text-white min-w-[70px] shadow-lg overflow-hidden relative z-1"
             >
                 {/* Menu button */}
                 <button

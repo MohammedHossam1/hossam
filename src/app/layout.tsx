@@ -80,7 +80,7 @@ console.log("layout")
             >
               <div className="absolute inset-0 bg-dark-3/95 rounded-none"></div>
             </div>
-            <div className="max-lg:hidden lg:w-[20%] relative z-3">
+            <div className="max-lg:hidden lg:w-[20%] relative z-1">
               <SideBar />
             </div>
             <div className="flex-1  overflow-y-auto overflow-x-hidden  hide-scrollbar ">

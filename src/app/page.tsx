@@ -5,7 +5,7 @@ export default async function Page() {
   const data = await getProjects(1, 5);
 
   return (
-    <main className="relative min-h-[calc(100vh)]">
+    <main className="relative min-h-[calc(100vh)] z-1">
       {/* Content */}
       <HomeUI data={data?.data} />
     </main>

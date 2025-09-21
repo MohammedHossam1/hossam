@@ -6,6 +6,7 @@ import { useState } from "react";
 import ProjectNextPrevContact from "./project-next-prev-contact";
 import ImageFallBack from "@/components/shared/image-fall-back";
 import { motion, AnimatePresence } from "framer-motion";
+import { CarouselItem } from "@/components/ui/carousel";
 // --- Types ---
 export type IProject = {
     id: string;
@@ -41,7 +42,13 @@ export default function ProjectDetails({ data, prev, next }: { data: IProject, s
                     <ImageFallBack src={data.url?.trim()} alt={data.name} width={1000} height={1000} className="w-full h-full object-cover" />
                 </div>
                 {data.images.length > 0 &&
-                    <CustomCarousel data={data.images} isProjectDetails={true} />
+                    <CustomCarousel >
+                        {data.images.map((item, index) => (
+                            <CarouselItem key={index} className="w-full basis-full lg:basis-1/2    overflow-hidden ">
+                                <ImageFallBack src={item} alt={item} width={500} height={500} className="object-cover w-full h-[300px]    object-top" />
+                            </CarouselItem>
+                        ))}
+                    </CustomCarousel>
                 }
                 <div className="">
                     <SectionHeader title={"Project Details"} />

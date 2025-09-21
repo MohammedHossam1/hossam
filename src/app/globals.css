@@ -190,3 +190,6 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   @apply bg-dark-3;
 }
+.custom-basis{
+  flex: 1 0 320px;
+}
