@@ -14,7 +14,7 @@ const FeaturedProjects = ({ data }: { data: IProject[] }) => {
 
     return (
         <section className=" text-text">
-            <SectionHeader title="Featured Projects" />
+            <SectionHeader title="Featured Projects" seeAllLink="/projects" />
             <CustomCarousel >
                 <>
                     {data.map((item, index) => (

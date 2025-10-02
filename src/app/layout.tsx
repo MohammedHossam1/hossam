@@ -7,10 +7,9 @@ import MobileNav from "@/components/navbar/mobile-nav";
 import { Toaster } from "@/components/ui/sonner";
 import ReactQueryProvider from "@/lib/reactquery-provider";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Saira } from "next/font/google";
 import Script from "next/script";
-
 
 const saira = Saira({
   subsets: ["latin"],
@@ -21,6 +20,7 @@ export const metadata: Metadata = {
   title: "Mohammed Hossam | Frontend Developer",
   description:
     "Mohammed Hossam Fayyad - Frontend Developer متخصص في بناء مواقع ويب حديثة باستخدام React, Next.js, Tailwind CSS. استعرض أعمالي ومشاريعي الاحترافية.",
+  metadataBase: new URL("https://mohammedhossam.site"),
   icons: {
     icon: "/favicon.ico",
   },
@@ -48,13 +48,17 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0b0b0b",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-console.log("layout")
   return (
     <html lang="en">
       <head>
@@ -72,6 +76,8 @@ console.log("layout")
           <div className="relative flex  gap-3 xl:gap-7 lg:h-[95vh] w-full rounded-2xl shadow-lg bg-dark-2/70">
             <div
               className="absolute top-0 left-0 right-0 h-50 bg-cover bg-center"
+              aria-hidden="true"
+              role="presentation"
               style={{
                 backgroundImage: "url('/as.jpg')",
                 maskImage: "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))",
@@ -80,7 +86,7 @@ console.log("layout")
             >
               <div className="absolute inset-0 bg-dark-3/95 rounded-none"></div>
             </div>
-            <div className="max-lg:hidden lg:w-[20%] relative z-1">
+            <div className="max-lg:hidden lg:w-[20%] relative z-2">
               <SideBar />
             </div>
             <div className="flex-1  overflow-y-auto overflow-x-hidden  hide-scrollbar ">
@@ -96,13 +102,8 @@ console.log("layout")
           <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </ReactQueryProvider>
-
         {/* <Validation /> */}
       </body>
-
     </html>
   );
 }
-
-
-

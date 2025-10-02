@@ -19,9 +19,8 @@ const VideoSkeleton = () => (
 const FeaturedReels = () => {
   const [open, setOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
-
   const { data, isLoading } = useGetFeaturedVideos();
-
+  console.log(data)
   const handleCardClick = (video: IVideo) => {
     setSelectedVideo(video);
     setOpen(true);
@@ -40,7 +39,7 @@ const FeaturedReels = () => {
           : data?.data?.map((video: IVideo) => (
             <CarouselItem
               key={video.id}
-              className="basis-1/3 sm:basis-1/4 md:basis-1/5 xl:basis-1/6 cursor-pointer group"
+              className="basis-1/3 sm:basis-1/4 md:basis-1/5 xl:basis-1/6 cursor-pointer group pl-1s"
               onClick={() => handleCardClick(video)}
               onMouseEnter={(e) => {
                 const vid = e.currentTarget.querySelector(
@@ -104,7 +103,7 @@ const FeaturedReels = () => {
           >
             {/* Overlay */}
             <motion.div
-              className="fixed inset-0 bg-black/50 z-20"
+              className="fixed inset-0 bg-black/20 z-20"
               onClick={() => setOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
