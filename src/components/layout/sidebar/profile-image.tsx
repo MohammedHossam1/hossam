@@ -46,14 +46,14 @@ const ProfileImage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-[5022]"
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-2"
             onClick={() => setPreviewOpen(false)}
           >
             <motion.img
               src="/avatar.jpeg"
               alt="preview"
               layoutId="profile-image"
-              className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg object-cover"
+              className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg object-cover relative "
             />
           </motion.div>
         )}
