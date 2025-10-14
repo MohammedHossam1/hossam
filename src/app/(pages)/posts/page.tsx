@@ -13,7 +13,14 @@ export default async function PostsPage() {
                         <div
                             className="w-full h-82 scroll-wrapper bg-white "
                         >
-                            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7381460374769979392?collapsed=1" height="559" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                            <iframe
+                                src={post.link}
+                                height="559"
+                                width="504"
+                                frameBorder="0"
+                                allowFullScreen
+                                title="Embedded post"
+                            ></iframe>
                         </div>
                     </div>
 
