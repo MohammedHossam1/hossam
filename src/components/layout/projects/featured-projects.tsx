@@ -1,23 +1,20 @@
 "use client";
 
-import { IProject } from "@/types";
-import { CustomCarousel } from "../../shared/custom-carousel";
-import SectionHeader from "../../shared/section-header";
 import { CarouselItem } from "@/components/ui/carousel";
-import ProjectCard from "./project-card";
+import { IProject } from "@/types";
 import Link from "next/link";
 import { use } from "react";
-import FadeEffect from "@/components/shared/fade-effect";
+import { CustomCarousel } from "../../shared/custom-carousel";
+import SectionHeader from "../../shared/section-header";
+import ProjectCard from "./project-card";
 const FeaturedProjects = ({ data }: { data: Promise<{ data: IProject[]; total: number }> }) => {
-    const projects = use(data);
-
+    const finalData = use(data)
     return (
-        <FadeEffect>
             <div className=" text-text">
                 <SectionHeader title="Featured Projects" seeAllLink="/projects" />
                 <CustomCarousel >
                     <>
-                        {projects?.data.map((item, index) => (
+                        {finalData.data.map((item, index) => (
                             <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
                                 <ProjectCard project={item} />
                             </CarouselItem>
@@ -30,7 +27,6 @@ const FeaturedProjects = ({ data }: { data: Promise<{ data: IProject[]; total: n
                     </>
                 </CustomCarousel>
             </div >
-        </FadeEffect>
     );
 };
 

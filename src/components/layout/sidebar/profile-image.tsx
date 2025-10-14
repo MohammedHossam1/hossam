@@ -15,7 +15,7 @@ const ProfileImage = () => {
           <ImageFallBack
             width={150}
             height={150}
-            src="/avatar.jpeg"
+            src="/avatar2.png"
             alt="profile"
             className="size-20 xl:size-24 rounded-full object-cover"
           />
@@ -50,7 +50,7 @@ const ProfileImage = () => {
             onClick={() => setPreviewOpen(false)}
           >
             <motion.img
-              src="/avatar.jpeg"
+              src="/avatar2.png"
               alt="preview"
               layoutId="profile-image"
               className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg object-cover relative "

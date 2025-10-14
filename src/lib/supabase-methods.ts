@@ -1,4 +1,4 @@
-import { IProject, ISkill, IVideo } from "@/types";
+import { IPost, IProject, ISkill, IVideo } from "@/types";
 import { supabase } from "./supabase-client";
 
 export async function getProjects(page: number, limit: number): Promise<{ data: IProject[]; total: number }> {
@@ -157,4 +157,15 @@ export async function getFeaturedVideos() {
   if (error) throw new Error(error.message);
 
   return { data: data as IVideo[], total: count ?? 0 };
+}
+export async function getPosts(page: number, limit: number) {
+  const { data, error, count } = await supabase
+    .from("posts")
+    .select("*", { count: "exact" })
+    .order("priority")
+    .range((page - 1) * limit, page * limit - 1)
+
+  if (error) throw new Error(error.message);
+
+  return { data: data as IPost[], total: count ?? 0 };
 }

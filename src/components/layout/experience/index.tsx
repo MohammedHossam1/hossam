@@ -1,5 +1,3 @@
-'use client';
-import { useState } from "react";
 import SectionHeader from "../../shared/section-header";
 // -----------------------------
 // Types
@@ -16,12 +14,10 @@ interface Item {
 // -----------------------------
 // Card (kept very close to your original API)
 // -----------------------------
-const ExperienceCard = ({ title, role, data, description, onHover }: Item) => {
+const ExperienceCard = ({ title, role, data, description }: Item) => {
     return (
         <div
             className="relative bg-card border border-neutral-800 p-4 shadow-sm me-4 py-7 cursor-pointer"
-            onMouseEnter={() => onHover?.(true)}
-            onMouseLeave={() => onHover?.(false)}
         >
             <div className="absolute -end-2 top-1 h-0 w-0 border-t-10 border-b-10 border-s-10 border-t-transparent border-b-transparent border-s-card bg-transparent" />
 
@@ -44,7 +40,6 @@ const ExperienceCard = ({ title, role, data, description, onHover }: Item) => {
 // Timeline Column
 // -----------------------------
 const TimelineColumn = ({ title, items }: { title: string; items: Item[] }) => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
         <div className="">
@@ -54,21 +49,17 @@ const TimelineColumn = ({ title, items }: { title: string; items: Item[] }) => {
 
                 <div className="space-y-8">
                     {items.map((item, idx) => (
-                        <div key={item.title + idx} className="relative">
+                        <div key={item.title + idx} className="relative group">
                             {/* Original Dot */}
                             <span className="absolute -end-[18px] top-2 h-3.5 w-3.5 rounded-full border-3 border-main ring-4 ring-neutral-900 z-10" />
 
                             {/* Pulse Dot */}
-                            {hoveredIndex === idx && (
-                                <span
-                                    className="absolute -end-[18px] top-2 h-3.5 w-3.5 animate-ping rounded-full border-2 border-main bg-main/30"
-                                />
-                            )}
-
+                            <span
+                                className="absolute hidden group-hover:block  -end-[18px] top-2 h-3.5 w-3.5 animate-ping rounded-full border-2 border-main bg-main/30"
+                            />
 
                             <ExperienceCard
                                 {...item}
-                                onHover={(isHovered) => setHoveredIndex(isHovered ? idx : null)}
                             />
                         </div>
                     ))}
@@ -111,28 +102,28 @@ const EDUCATION: Item[] = [
 
 const WORK: Item[] = [
     {
-      title: "Serv5",
-      role: "Frontend Developer (Past)",
-      data: "2024 – 2025/9",
-      description:
-        "Built responsive dashboards and landing pages, shipped design systems, and collaborated with backend teams.",
+        title: "Serv5",
+        role: "Frontend Developer (Past)",
+        data: "2024 – 2025/9",
+        description:
+            "Built responsive dashboards and landing pages, shipped design systems, and collaborated with backend teams.",
     },
     {
-      title: "Qadi-Tech",
-      role: "Frontend Developer (Part-time)",
-      data: "2025 – Present",
-      description:
-        "Working part-time on React projects, contributing to UI components, and optimizing web performance.",
+        title: "Qadi-Tech",
+        role: "Frontend Developer (Part-time)",
+        data: "2025 – Present",
+        description:
+            "Working part-time on React projects, contributing to UI components, and optimizing web performance.",
     },
     {
-      title: "Freelance Projects",
-      role: "Frontend Engineer",
-      data: "2025 – Present",
-      description:
-        "Delivered two independent freelance projects, focusing on React apps, micro-frontends, and clean UI/UX design.",
+        title: "Freelance Projects",
+        role: "Frontend Engineer",
+        data: "2025 – Present",
+        description:
+            "Delivered two independent freelance projects, focusing on React apps, micro-frontends, and clean UI/UX design.",
     },
-  ];
-  
+];
+
 // -----------------------------
 // Main Component — split page into two columns
 // -----------------------------
@@ -143,6 +134,7 @@ export default function ExperienceTimeline({
     education?: Item[];
     work?: Item[];
 }) {
+    console.log("work");
     return (
         <main className="">
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4  xl:gap-10">
@@ -153,8 +145,3 @@ export default function ExperienceTimeline({
     );
 }
 
-// -----------------------------
-// Usage
-// -----------------------------
-// import ExperienceTimeline from "./ExperienceTimeline";
-// <ExperienceTimeline education={yourEducationItems} work={yourWorkItems} />
