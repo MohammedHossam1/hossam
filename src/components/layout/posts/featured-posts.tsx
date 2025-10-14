@@ -30,11 +30,11 @@ const FeaturedPosts = ({ data }: { data: Promise<{ data: IPost[]; total: number 
                                             className="w-full h-82 scroll-wrapper"
                                         >
 
-                                            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7381460374769979392?collapsed=1" height="100%" width="100%" frameborder="0"
+                                            <iframe src={item.link} height="100%" width="100%" frameBorder="0"
                                                 style={{
-                                                    pointerEvents: active ? "auto" : "none", 
+                                                    pointerEvents: active ? "auto" : "none",
                                                 }}
-                                                allowfullscreen="" title="Embedded post"></iframe>
+                                                allowFullScreen title="Embedded post"></iframe>
 
                                         </div>
                                     </div>
