@@ -1,10 +1,9 @@
 'use client'
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { Button } from "../ui/button"
-import { motion } from "framer-motion"
 import ImageFallBack from "../shared/image-fall-back"
-import FadeEffect from "../shared/fade-effect"
+import { Button } from "../ui/button"
 
 const Hero = () => {
     const fullText = "Modern web apps, built right"
@@ -50,7 +49,6 @@ const Hero = () => {
     }
 
     return (
-        <FadeEffect>
 
             <div className="relative">
                 <div className="absolute bottom-full inset-x-2 lg:inset-x-10 h-3 lg:h-7 bg-dark-2"></div>
@@ -110,7 +108,6 @@ const Hero = () => {
 
                 </div>
             </div>
-        </FadeEffect>
     )
 }
 

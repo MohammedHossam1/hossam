@@ -53,3 +53,13 @@ export type IVideo = {
   description: string;
   tag: string;
 };
+export interface IPost {
+  id: string;
+  title: string;
+  slug: string;
+  link: string;
+  description: string;
+  priority: number;
+  created_at: string;
+  updated_at: string;
+}

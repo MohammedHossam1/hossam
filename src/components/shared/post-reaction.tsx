@@ -1,6 +1,7 @@
 'use client'
 import { HandHeart, Heart, Laugh, Lightbulb, PartyPopper, ThumbsUp } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { Button } from '../ui/button';
 interface Reaction {
   id: string;
   icon: React.ReactNode;
@@ -185,7 +186,7 @@ export default function PostReaction({ initialCount = 0, onReactionChange, initi
               onClick={() => handleReactionClick(reaction)}
               className={`
                 flex items-center justify-center p-2 rounded-full transition-all duration-200
-                transform hover:scale-125 hover:-translate-y-1 active:scale-110
+                transform hover:scale-130 cursor-pointer hover:-translate-y-1 active:scale-110
                 ${reaction.hoverColor}
                 ${selectedReaction?.id === reaction.id ? 'bg-gray-100' : ''}
               `}
@@ -202,10 +203,10 @@ export default function PostReaction({ initialCount = 0, onReactionChange, initi
       </div>
 
       {/* Main Reaction Button */}
-      <button
+      <Button
         onClick={handleMainButtonClick}
         className={`
-          flex items-center gap-2 cursor-pointer   rounded-lg transition-all duration-300
+          flex items-center gap-2 cursor-pointer bg-dark-3 hover:bg-dark-1 py-1 h-fi   rounded-lg transition-all duration-300
           ${selectedReaction
             ? `${selectedReaction.color}  hovers:bg-gray-100`
             : 'text-gray-600 hover:text-blue-600 '
@@ -230,7 +231,7 @@ export default function PostReaction({ initialCount = 0, onReactionChange, initi
             {reactionCount}
           </span>
         )}
-      </button>
+      </Button>
 
       {/* Floating reaction indicator */}
       {isAnimating && selectedReaction && (

@@ -1,4 +1,4 @@
-import { getFeaturedVideos, getProjectReactions, getProjects, getSkills, getSkillsFilter, getVideos } from "@/lib/supabase-methods";
+import { getFeaturedVideos, getPosts, getProjectReactions, getProjects, getSkills, getSkillsFilter, getVideos } from "@/lib/supabase-methods";
 import { getClientIp } from "@/lib/utils";
 import { IProject, ISkill } from "@/types";
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
@@ -65,6 +65,13 @@ export function useGetFeaturedVideos() {
   return useQuery({
     queryKey: ["videos"],
     queryFn: () => getFeaturedVideos(),
+    staleTime: 1000 * 60 * 5,
+  });
+}
+export function useGetPosts(page: number, limit: number) {
+  return useQuery({
+    queryKey: ["posts"],
+    queryFn: () => getPosts(page, limit),
     staleTime: 1000 * 60 * 5,
   });
 }
