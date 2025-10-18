@@ -44,15 +44,15 @@ const Hero = () => {
     }
 
     const item = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
     }
 
     return (
 
             <div className="relative">
                 <div className="absolute bottom-full inset-x-2 lg:inset-x-10 h-3 lg:h-7 bg-dark-2"></div>
-                <div className="relative bg-[url('/as.png')] text-white bg-cover bg-center h-[40vh] lg:h-[320px] px-5 lg:px-14 flex   ">
+                <div className="relative bg-[url('/as.jpg')] text-white bg-cover bg-center h-[30vh] lg:h-[320px] px-5 lg:px-14 flex   ">
                     {/* Dark Overlay */}
                     <div className="absolute inset-0 bg-dark-3/50 lg:bg-dark-3/30 rounded-none"></div>
 

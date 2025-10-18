@@ -5,13 +5,11 @@ import { IProject } from "@/types";
 import Link from "next/link";
 import { use } from "react";
 import { CustomCarousel } from "../../shared/custom-carousel";
-import SectionHeader from "../../shared/section-header";
 import ProjectCard from "./project-card";
 const FeaturedProjects = ({ data }: { data: Promise<{ data: IProject[]; total: number }> }) => {
     const finalData = use(data)
     return (
             <div className=" text-text">
-                <SectionHeader title="Featured Projects" seeAllLink="/projects" />
                 <CustomCarousel >
                     <>
                         {finalData.data.map((item, index) => (

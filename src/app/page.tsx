@@ -6,6 +6,8 @@ import FeaturedProjects from "@/components/layout/projects/featured-projects";
 import FeaturedReels from "@/components/layout/videos/featured-videos";
 import ExperienceTimeline from "@/components/layout/experience";
 import FeaturedPosts from "@/components/layout/posts/featured-posts";
+import ProjectCardSkeleton from "@/components/layout/projects/project-skelton";
+import SectionHeader from "@/components/shared/section-header";
 
 export default function Page() {
   const data = getProjects(1, 5);
@@ -16,11 +18,12 @@ export default function Page() {
 
       {/* Content */}
       <Hero />
-      <Suspense fallback={<Loading small />}>
+      <SectionHeader title="Featured Projects" seeAllLink="/projects" />
+      <Suspense fallback={<ProjectCardSkeleton />}>
         <FeaturedProjects data={data || []} />
       </Suspense>
       <FeaturedReels />
-      <Suspense fallback={<Loading small/>}>
+      <Suspense fallback={<Loading small />}>
         <FeaturedPosts data={posts || []} />
       </Suspense>
       <ExperienceTimeline />
