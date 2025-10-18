@@ -6,20 +6,23 @@ import FeaturedProjects from "@/components/layout/projects/featured-projects";
 import FeaturedReels from "@/components/layout/videos/featured-videos";
 import ExperienceTimeline from "@/components/layout/experience";
 import FeaturedPosts from "@/components/layout/posts/featured-posts";
+
 export default function Page() {
   const data = getProjects(1, 5);
   const posts = getPosts(1, 5);
 
   return (
     <main className=" min-h-[calc(100vh)] z-1 relative  py-5 lg:py-16 space-y-8">
+
       {/* Content */}
       <Hero />
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading small />}>
         <FeaturedProjects data={data || []} />
       </Suspense>
-      <FeaturedPosts data={posts || []} />
-
       <FeaturedReels />
+      <Suspense fallback={<Loading small/>}>
+        <FeaturedPosts data={posts || []} />
+      </Suspense>
       <ExperienceTimeline />
     </main>
   );
