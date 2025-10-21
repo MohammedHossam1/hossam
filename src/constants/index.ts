@@ -13,3 +13,17 @@ export const projects: IProject[] = [
     { id: "4", slug: "project", name: "Project Four", description: "Description for project four.", url: "/project4.jpg", code: "", images: [""], skills: [""], demo: "" },
     { id: "5", slug: "project", name: "Project Five", description: "Description for project five.", url: "/project5.jpg", code: "", images: [""], skills: [""], demo: "" },
 ];
+export const address = [
+    {
+      name: "Egypt",
+      title: "Residence : "
+    },
+    {
+      name: "Giza",
+      title: "City : "
+    },
+    {
+      name: "27",
+      title: "Age : "
+    }
+  ]

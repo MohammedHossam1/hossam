@@ -99,6 +99,8 @@ const Hero = () => {
                                 width={1500}
                                 height={1500}
                                 src="/ava.png"
+                                placeholder="blur"
+                                blurDataURL="/ava.png"
                                 alt="avatar"
                                 className="w-full h-full  scale-110 "
                             />
