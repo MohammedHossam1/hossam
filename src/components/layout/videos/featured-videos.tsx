@@ -20,7 +20,6 @@ const FeaturedReels = () => {
   const [open, setOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
   const { data, isLoading } = useGetFeaturedVideos();
-  console.log(data)
   const handleCardClick = (video: IVideo) => {
     setSelectedVideo(video);
     setOpen(true);

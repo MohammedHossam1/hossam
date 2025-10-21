@@ -1,4 +1,4 @@
-import ContactForm from "@/components/layout/contact"
+import ContactForm from "@/components/layout/contact/contact"
 import SectionHeader from "@/components/shared/section-header"
 
 const ContactPage = () => {

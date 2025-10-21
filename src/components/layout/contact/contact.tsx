@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { FaUser } from "react-icons/fa";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { sendMessage } from "@/lib/supabase-methods";
 
 const schema = z.object({

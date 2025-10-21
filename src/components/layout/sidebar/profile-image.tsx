@@ -15,6 +15,8 @@ const ProfileImage = () => {
           <ImageFallBack
             width={150}
             height={150}
+            sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+            quality={1}
             src="/avatar2.png"
             alt="profile"
             className="size-20 xl:size-24 rounded-full object-cover"
@@ -54,6 +56,7 @@ const ProfileImage = () => {
               alt="preview"
               layoutId="profile-image"
               className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg object-cover relative "
+              sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
             />
           </motion.div>
         )}
