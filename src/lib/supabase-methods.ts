@@ -36,16 +36,39 @@ export async function getProjectBySlug(slug: string): Promise<IProject | null> {
   }
   return data as IProject;
 }
+// export async function getSkills() {
+//   const { data, error, count } = await supabase
+//     .from("skills")
+//     .select("*", { count: "exact" })
+//     .order("priority", { ascending: true })
+
+//   if (error) throw new Error(error.message);
+
+//   return { data: data as ISkill[], total: count ?? 0 };
+// }
 export async function getSkills() {
-  const { data, error, count } = await supabase
-    .from("skills")
-    .select("*", { count: "exact" })
-    .order("priority", { ascending: true })
+  const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/skills?select=*&order=priority.asc`;
 
-  if (error) throw new Error(error.message);
+  const res = await fetch(url, {
+    headers: {
+      apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`,
+      "Content-Type": "application/json",
+    },
+    next: { revalidate: 60 * 60 * 24 * 7 },
+  });
 
-  return { data: data as ISkill[], total: count ?? 0 };
+  if (!res.ok) {
+    throw new Error(`Failed to fetch skills: ${res.statusText}`);
+  }
+  const data = await res.json();
+
+  return {
+    data,
+    total: data.length ?? 0,
+  };
 }
+
 export async function getSkillsFilter() {
   const { data, error, count } = await supabase
     .from("skills_filter")

@@ -134,7 +134,6 @@ export default function ExperienceTimeline({
     education?: Item[];
     work?: Item[];
 }) {
-    console.log("work");
     return (
         <main className="">
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4  xl:gap-10">

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "Mohammed Hossam Portfolio",
     images: [
       {
-        url:"https://mohammedhossam.site/avatar2.png",
+        url: "https://mohammedhossam.site/avatar2.png",
         width: 1200,
         height: 630,
         alt: "Mohammed Hossam Portfolio Preview",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Mohammed Hossam | Frontend Developer",
     description:
       "Frontend Developer متخصص في بناء مواقع ويب حديثة باستخدام React, Next.js, Tailwind CSS.",
-      images: ["https://mohammedhossam.site/avatar2.png"],
+    images: ["https://mohammedhossam.site/avatar2.png"],
   },
 };
 
