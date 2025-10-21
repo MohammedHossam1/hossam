@@ -1,5 +1,4 @@
 import "./globals.css";
-
 import Footer from "@/components/footer";
 import SideBar from "@/components/layout/sidebar";
 import Navbar from "@/components/navbar";
@@ -59,6 +58,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <head>
