@@ -1,22 +1,21 @@
 'use client'
-import ImageFallBack from '@/components/shared/image-fall-back'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
-import { MdOutlineZoomOutMap } from "react-icons/md";
+import { useState } from 'react'
+import { MdOutlineZoomOutMap } from "react-icons/md"
 
 const ProfileImage = () => {
   const [previewOpen, setPreviewOpen] = useState(false)
 
   return (
     <div className="bg-dark-3 w-full flex flex-col items-center py-8">
-      <div className="relative group cursor-pointer z-1000" onClick={() => setPreviewOpen(true)}>
-        <motion.div layoutId="profile-image">
-          <ImageFallBack
+      <div className="relative group cursor-pointer z-1000 " onClick={() => setPreviewOpen(true)}>
+        <motion.div layoutId="">
+          <Image
             width={150}
             height={150}
-            sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-            quality={1}
+            priority
             src="/avatar2.png"
             alt="profile"
             className="size-20 xl:size-24 rounded-full object-cover"
@@ -48,16 +47,21 @@ const ProfileImage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ delay: 0.1 }} // ✅ تأخير بسيط
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-2"
             onClick={() => setPreviewOpen(false)}
           >
-            <motion.img
-              src="/avatar2.png"
-              alt="preview"
-              layoutId="profile-image"
-              className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg object-cover relative "
-              sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-            />
+            <motion.div layoutId="profile-image" className="rounded-lg overflow-hidden">
+              <Image
+                src="/avatar2.png"
+                alt="preview"
+                width={300}
+                height={300}
+                className="object-cover w-full"
+                sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+              />
+            </motion.div>
+
           </motion.div>
         )}
       </AnimatePresence>
