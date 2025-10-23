@@ -1,11 +1,11 @@
 import PostReaction from "@/components/shared/post-reaction";
+import { useGetClientIp, useGetProjectReactions } from "@/hooks";
 import { addOrUpdateReaction } from "@/lib/supabase-methods";
 import { IProject } from "@/types";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import ImageFallBack from "../../shared/image-fall-back";
-import { useGetClientIp, useGetProjectReactions } from "@/hooks";
 
 const ProjectCard: React.FC<{ project: IProject }> = ({ project }) => {
   const { data: ip } = useGetClientIp();
@@ -25,7 +25,7 @@ const ProjectCard: React.FC<{ project: IProject }> = ({ project }) => {
       <div className="bg-card  text-text shadow-lg flex flex-col gap-4 h-full transition-all duration-300">
         {project.url && (
           <div className="w-full relative h-40 overflow-hidden ">
-            <ImageFallBack
+            <Image  
               fill
               src={project.url}
               sizes="(max-width: 768px) 100vw, 

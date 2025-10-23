@@ -34,9 +34,9 @@ const MobileNavClient = ({ data }: { data: ISkill[] }) => {
             </Sheet>
             {/* Logo */}
             <Link href="/">
-                <h1 className="font-bold text-xl uppercase tracking-widest hover:text-main cursor-pointer block duration-500 transition-all">
+                <h2 className="font-bold text-xl uppercase tracking-widest hover:text-main cursor-pointer block duration-500 transition-all">
                     Fayyad
-                </h1>
+                </h2>
             </Link>
             {/* Navbar */}
             <Sheet open={isOpen} onOpenChange={(openState) => {
