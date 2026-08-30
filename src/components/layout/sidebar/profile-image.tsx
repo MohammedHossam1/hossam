@@ -10,7 +10,7 @@ const ProfileImage = () => {
 
   return (
     <div className="bg-dark-3 w-full flex flex-col items-center py-8">
-      <div className="relative group cursor-pointer z-1000 " onClick={() => setPreviewOpen(true)}>
+      <div className="relative group cursor-pointer  " onClick={() => setPreviewOpen(true)}>
         <motion.div layoutId="">
           <Image
             width={150}
@@ -48,7 +48,7 @@ const ProfileImage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ delay: 0.1 }} // ✅ تأخير بسيط
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-2"
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-22"
             onClick={() => setPreviewOpen(false)}
           >
             <motion.div layoutId="profile-image" className="rounded-lg overflow-hidden">

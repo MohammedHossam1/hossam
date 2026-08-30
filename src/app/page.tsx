@@ -8,6 +8,7 @@ import ExperienceTimeline from "@/components/layout/experience";
 import FeaturedPosts from "@/components/layout/posts/featured-posts";
 import ProjectCardSkeleton from "@/components/layout/projects/project-skelton";
 import SectionHeader from "@/components/shared/section-header";
+import ProjectsShop from "@/components/layout/shop/projects-shop";
 
 export default function Page() {
   const data = getProjects(1, 5);
@@ -17,6 +18,7 @@ export default function Page() {
     <main className=" min-h-[calc(100vh)] z-1 relative  py-5 lg:py-16 space-y-8">
       {/* Content */}
       <Hero />
+      <ProjectsShop />
       <SectionHeader title="Featured Projects" seeAllLink="/projects" />
       <Suspense fallback={<ProjectCardSkeleton />}>
         <FeaturedProjects data={data || []} />

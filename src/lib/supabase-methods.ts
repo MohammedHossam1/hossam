@@ -36,16 +36,7 @@ export async function getProjectBySlug(slug: string): Promise<IProject | null> {
   }
   return data as IProject;
 }
-// export async function getSkills() {
-//   const { data, error, count } = await supabase
-//     .from("skills")
-//     .select("*", { count: "exact" })
-//     .order("priority", { ascending: true })
 
-//   if (error) throw new Error(error.message);
-
-//   return { data: data as ISkill[], total: count ?? 0 };
-// }
 export async function getSkills() {
   const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/skills?select=*&order=priority.asc`;
 

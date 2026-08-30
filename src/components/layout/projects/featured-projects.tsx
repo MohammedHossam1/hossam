@@ -8,11 +8,13 @@ import { CustomCarousel } from "../../shared/custom-carousel";
 import ProjectCard from "./project-card";
 const FeaturedProjects = ({ data }: { data: Promise<{ data: IProject[]; total: number }> }) => {
     const finalData = use(data)
+    const featuredItems = finalData.data.filter(item => item.featured);
+    
     return (
             <div className=" text-text">
                 <CustomCarousel >
                     <>
-                        {finalData.data.map((item, index) => (
+                        {featuredItems.map((item, index) => (
                             <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3 ">
                                 <ProjectCard project={item} />
                             </CarouselItem>
