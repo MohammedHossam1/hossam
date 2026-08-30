@@ -53,7 +53,7 @@ export type IVideo = {
   video_src: string;
   title: string;
   description: string;
-  tag: string[];
+  tag: string[] | string;
 };
 export interface IPost {
   id: string;

@@ -23,9 +23,26 @@ interface VideoCardProps {
   className?: string;
 }
 
+const normalizeTags = (rawTag: string[] | string | undefined | null): string[] => {
+  if (!rawTag) return [];
+  if (Array.isArray(rawTag)) return rawTag.filter(Boolean);
+  if (typeof rawTag === "string") {
+    if (rawTag.includes(",")) {
+      return rawTag
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+    }
+    const trimmed = rawTag.trim();
+    return trimmed ? [trimmed] : [];
+  }
+  return [];
+};
+
 const VideoCard = ({ video, className = "" }: VideoCardProps) => {
   const [open, setOpen] = useState(false);
   const previewVideoRef = useRef<HTMLVideoElement | null>(null);
+  const tags = normalizeTags(video.tag);
 
   const handleMouseEnter = () => {
     if (previewVideoRef.current) {
@@ -81,9 +98,9 @@ const VideoCard = ({ video, className = "" }: VideoCardProps) => {
           <h3 className="text-sm font-semibold text-white line-clamp-2 group-hover:text-main transition-colors">
             {video.title}
           </h3>
-          <div className="flex flex-wrap gap-2 items-center">
-            {video.tag && (
-              video.tag?.slice(0, 2).map((tag) => (
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 items-center">
+              {tags.slice(0, 2).map((tag) => (
                 <Link
                   key={tag}
                   href={`/videos?tag=${tag}`}
@@ -93,12 +110,12 @@ const VideoCard = ({ video, className = "" }: VideoCardProps) => {
                   <span className="text-main font-bold">#</span>
                   {tag}
                 </Link>
-              ))
-            )}
-            {video.tag && video.tag.length > 2 && (
-              <span className="text-xs text-text">+{video.tag.length - 2}</span>
-            )}
-          </div>
+              ))}
+              {tags.length > 2 && (
+                <span className="text-xs text-text">+{tags.length - 2}</span>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -126,9 +143,9 @@ const VideoCard = ({ video, className = "" }: VideoCardProps) => {
             <DialogTitle className="text-base md:text-lg font-bold text-white line-clamp-2">
               {video.title}
             </DialogTitle>
-            {video.tag && (
+            {tags.length > 0 && (
               <div className="flex flex-wrap gap-2 items-center">
-                {video.tag.map((tag) => (
+                {tags.map((tag) => (
                   <DialogDescription key={tag} className="text-xs text-main capitalize font-medium">
                     <Link href={`/videos?tag=${tag}`}>
                       <span className="text-main font-bold">#</span>
@@ -139,7 +156,7 @@ const VideoCard = ({ video, className = "" }: VideoCardProps) => {
               </div>
             )}
             {video.description && (
-              <p className="text-xs text-text mt-1 ">
+              <p className="text-xs text-text mt-1">
                 {video.description}
               </p>
             )}
