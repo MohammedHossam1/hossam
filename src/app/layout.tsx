@@ -87,7 +87,7 @@ export default function RootLayout({
             >
               <div className="absolute inset-0 bg-dark-3/95 rounded-none"></div>
             </div>
-            <div className="max-lg:hidden lg:w-[20%] relative z-2">
+            <div className="max-lg:hidden lg:w-[20%] relative z-2x">
               <SideBar />
             </div>
             <div className="flex-1  overflow-y-auto overflow-x-hidden  hide-scrollbar ">

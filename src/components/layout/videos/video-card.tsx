@@ -1,105 +1,153 @@
-import { IVideo } from '@/types';
-import { Play } from 'lucide-react';
-import Link from 'next/link';
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from 'react';
+"use client";
 
-const VideoCard = ({ video }: { video: IVideo }) => {
-  const [open, setOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { IVideo } from "@/types";
+import { Play } from "lucide-react";
+import Link from "next/link";
+import { useRef, useState } from "react";
 
-  const handleCardClick = (video: IVideo) => {
-    setSelectedVideo(video);
-    setOpen(true);
-  };
-    return (
-        <div
-            onClick={() => handleCardClick(video)}
-            onMouseEnter={(e) => {
-                const vid = e.currentTarget.querySelector(
-                    "video"
-                ) as HTMLVideoElement;
-                vid?.play();
-            }}
-            onMouseLeave={(e) => {
-                const vid = e.currentTarget.querySelector(
-                    "video"
-                ) as HTMLVideoElement;
-                if (vid) {
-                    vid.pause();
-                    vid.currentTime = 0;
-                }
-            }}
-        >
-            <div className="relative rounded-xl overflow-hidden aspect-[9/16] bg-gray-500 shadow border border-gray-500 ">
-                {/* Overlay */}
-                <div className="absolute bottom-0 right-0 inset-x-0 h-1/3 group-hover:h-0 transition-all duration-700 bg-gradient-to-t from-black/80 to-black/0 z-10"></div>
+export const VideoSkeleton = ({ className = "" }: { className?: string }) => (
+  <div
+    className={`relative rounded-xl overflow-hidden aspect-[9/16] bg-dark-2/60 border border-white/5 animate-pulse ${className}`}
+  />
+);
 
-                {/* Preview video */}
-                <video
-                    src={video.video_src}
-                    className="h-full w-full object-cover   rounded-xl"
-                    muted
-                    loop
-                    playsInline
-                />
-
-                {/* Play logo */}
-                <div className="absolute top-2 right-2 bg-black/50 group-hover:translate-x-30 transition-all duration-700 rounded-full p-2 z-20">
-                    <Play className="text-white w-5 h-5 animate-pulse" />
-                </div>
-
-                {/* Title */}
-                <div className="absolute bottom-2 left-1  rounded-xl group-hover:opacity-0 transition-all duration-600 text-white z-20">
-                    <h3 className="text-sm text-white font-bold flex gap-2 items-center first-letter:text-main">
-                        {video.title}
-                    </h3>
-                    <Link
-                        href={`/videos?tag=${video.tag}`}
-                        className="text-xs hover:text-main transition-all duration-700 capitalize text-text font-bold flex gap-2 items-center"
-                    >
-                        {video.tag}
-                    </Link>
-                </div>
-            </div>
-            {/* Dialog with animation */}
-            <AnimatePresence>
-                {open && selectedVideo && (
-                    <motion.div
-                        className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        {/* Overlay */}
-                        <motion.div
-                            className="fixed inset-0 bg-black/50 z-20"
-                            onClick={() => setOpen(false)}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        />
-
-                        {/* Video box */}
-                        <motion.div
-                            initial={{ scale: 0.7, opacity: 0, y: 50 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.7, opacity: 0, y: 50 }}
-                            transition={{ duration: 0.3 }}
-                            className="relative z-50 w-[300px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl"
-                        >
-                            <video
-                                src={selectedVideo.video_src}
-                                className="w-full h-full object-cover"
-                                controls
-                                autoPlay
-                            />
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    )
+interface VideoCardProps {
+  video: IVideo;
+  className?: string;
 }
 
-export default VideoCard
+const VideoCard = ({ video, className = "" }: VideoCardProps) => {
+  const [open, setOpen] = useState(false);
+  const previewVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleMouseEnter = () => {
+    if (previewVideoRef.current) {
+      previewVideoRef.current.play().catch(() => {
+        // Ignore autoplay errors if any
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (previewVideoRef.current) {
+      previewVideoRef.current.pause();
+      previewVideoRef.current.currentTime = 0;
+    }
+  };
+
+  const handleCardClick = () => {
+    if (previewVideoRef.current) {
+      previewVideoRef.current.pause();
+    }
+    setOpen(true);
+  };
+
+  return (
+    <>
+      <div
+        onClick={handleCardClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`group relative rounded-xl overflow-hidden aspect-[9/16] bg-dark-2 border border-white/5 hover:border-main/40 transition-all duration-300 shadow-md cursor-pointer select-none ${className}`}
+      >
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none z-10 transition-opacity duration-300 group-hover:opacity-90" />
+
+        {/* Video preview thumbnail */}
+        <video
+          ref={previewVideoRef}
+          src={video.video_src}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+
+        {/* Play badge */}
+        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-xs text-white group-hover:bg-main group-hover:text-dark-1 transition-all duration-300 rounded-full p-2.5 z-20 shadow-lg group-hover:scale-110">
+          <Play className="w-4 h-4 fill-current ml-0.5" />
+        </div>
+
+        {/* Video Title & Tag metadata */}
+        <div className="absolute bottom-0 inset-x-0 p-3.5 z-20 flex flex-col gap-1 transition-transform duration-300">
+          <h3 className="text-sm font-semibold text-white line-clamp-2 group-hover:text-main transition-colors">
+            {video.title}
+          </h3>
+          <div className="flex flex-wrap gap-2 items-center">
+            {video.tag && (
+              video.tag?.slice(0, 2).map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/videos?tag=${tag}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-xs text-text hover:text-main capitalize font-medium flex items-center gap-1 transition-colors w-fit"
+                >
+                  <span className="text-main font-bold">#</span>
+                  {tag}
+                </Link>
+              ))
+            )}
+            {video.tag && video.tag.length > 2 && (
+              <span className="text-xs text-text">+{video.tag.length - 2}</span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* shadcn Dialog Player */}
+      <Dialog open={open} onOpenChange={setOpen} modal={false}>
+        <DialogContent
+          dir="rtl"
+          className="p-0 sm:max-w-4xl max-w-[95vw] w-fit border border-white/10 bg-dark-2/95 backdrop-blur-md overflow-hidden rounded-2xl gap-0 shadow-2xl focus:outline-none"
+        >
+          {/* Responsive Video Container - supports reels (vertical 9:16) & landscape (horizontal 16:9) */}
+          <div className="relative flex items-center justify-center w-full bg-black/95 overflow-hidden">
+            {open && (
+              <video
+                src={video.video_src}
+                className="max-h-[75vh] md:max-h-[80vh] max-w-full w-auto h-auto object-contain focus:outline-none"
+                controls
+                autoPlay
+                playsInline
+              />
+            )}
+          </div>
+
+          {/* Dialog Header / Footer Info */}
+          <DialogHeader className="p-4 w-full bg-dark-2 border-t border-white/10 text-right! gap-1">
+            <DialogTitle className="text-base md:text-lg font-bold text-white line-clamp-2">
+              {video.title}
+            </DialogTitle>
+            {video.tag && (
+              <div className="flex flex-wrap gap-2 items-center">
+                {video.tag.map((tag) => (
+                  <DialogDescription key={tag} className="text-xs text-main capitalize font-medium">
+                    <Link href={`/videos?tag=${tag}`}>
+                      <span className="text-main font-bold">#</span>
+                      {tag}
+                    </Link>
+                  </DialogDescription>
+                ))}
+              </div>
+            )}
+            {video.description && (
+              <p className="text-xs text-text mt-1 ">
+                {video.description}
+              </p>
+            )}
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+export default VideoCard;

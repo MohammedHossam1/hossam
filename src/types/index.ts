@@ -34,6 +34,8 @@ export type IProject = {
   skills: string[];
   code: string;
   demo: string;
+  price: number;
+  featured: boolean;
 };
 export type ISkill = {
   id: string;
@@ -51,7 +53,7 @@ export type IVideo = {
   video_src: string;
   title: string;
   description: string;
-  tag: string;
+  tag: string[];
 };
 export interface IPost {
   id: string;
