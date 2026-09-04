@@ -151,8 +151,8 @@ const ProjectsShop = () => {
             {shopProjects.map((project) => {
               const price = getProjectPrice(project);
               return (
-                <CarouselItem key={project.id} className="w-full basis-full  md:basis-1/2 lg:basis-1/3 p-2 ms-2 h-full">
-                  <div className="bg-card border border-dark-3/60 rounded-lg overflow-hidden flex flex-col  group transition-all duration-300 hover:border-main/20 hover:shadow-[0_0_20px_rgba(255,193,7,0.12)]">
+                <CarouselItem key={project.id} className="w-full basis-full  md:basis-1/2 lg:basis-1/3 p-2 h-full">
+                  <div className="bg-card border border-dark-3/60  overflow-hidden flex flex-col  group transition-all duration-300 hover:border-main/20 hover:shadow-[0_0_20px_rgba(255,193,7,0.12)]">
                     
                     {/* Image and Price Badge */}
                     <div className="relative w-full h-44 overflow-hidden">
